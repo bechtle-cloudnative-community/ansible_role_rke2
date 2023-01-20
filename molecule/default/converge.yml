@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include bechtle.rke2"
+      include_role:
+        name: "bechtle.rke2"
