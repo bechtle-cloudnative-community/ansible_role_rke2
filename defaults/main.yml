@@ -1,2 +1,49 @@
 ---
 # defaults file for rke2
+# Definition for type of rke Node
+# For Server(Control Plane): server
+# For Agent(Worker): agent
+node_type: server
+
+# Set the RKE2 Version
+# default is stable. for more Information:
+# https://docs.rke2.io/install/configuration
+# - testing
+# - latest
+# - stable
+channel: stable
+
+# RKE2 Install url
+channel_url: https://get.rke2.io
+
+# RKE2 install Shell Script path and name
+install_sh: /usr/local/bin/rke2_install.sh
+
+# Set RKE2 
+# Set of the most commen values for rke2 config option
+# https://docs.rke2.io/reference/server_config
+# Address to listen on
+bind_address: 0.0.0.0
+
+# Cluster Address for loadbalancing. Necessary for continius and availability.
+# https://docs.rke2.io/install/ha
+# This endpoint can be set up using any number approaches, such as:
+# The folowing option to provide LB:
+#  - A layer 4 (TCP) load balancer
+#  - Round-robin DNS
+#  - Virtual or elastic IP addresses
+cluster_fqdn: debian-rke-server-1
+
+# Subject alternative names for the Server and Cluster API to accept
+# FQDN or IPv4 of the Server Nodes
+tls_san:
+  - "{{ cluster_fqdn }}"
+  
+# Cluster IP Address Range for the Pods and Services. Set to RKE2 defaulte
+cluster_cidr: 10.42.0.0/16
+service_cidr: "{{ cluster_cidr }}"
+
+# Path Config file
+template_config: config.yaml.j2
+config_path: /etc/rancher/rke2
+config_file: "{{ config_path }}/config.yaml"

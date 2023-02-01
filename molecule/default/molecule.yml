@@ -2,12 +2,42 @@
 dependency:
   name: galaxy
 driver:
-  name: docker
+  name: vagrant
+  provider:
+    name: libvirt
+    cachier: machine
+    parallel: true
+    default_box: 'generic/dabian11'
 platforms:
-  - name: instance
-    image: quay.io/centos/centos:stream8
-    pre_build_image: true
+  - name: ansible-rke2-server-1
+    hostname: ansible-rke2-server-1.geiger.cloud
+    box: 'generic/debian11'
+    interfaces:
+      - network_name: private_network
+        ip: 192.168.10.10
+    memory: 4096
+    cpus: 2
+  - name: ansible-rke2-agent-1
+    hostname: ansible-rke2-agent-1.geiger.cloud
+    box: 'generic/debian11'
+    interfaces:
+      - network_name: private_network
+        ip: 192.168.10.10
+    memory: 4096
+    cpus: 2
 provisioner:
   name: ansible
+  connection_options:
+    ansible_ssh_user: vagrant
+    ansible_become: true
+  log: true
+  inventory:
+    host_vars:
+      ansible-rke2-server-1:        
+        rke2_type: server
+        fqdn: "{{ inventory_name }}.geiger.cloud"
+      ansible-rke2-agent-1:
+        rke2_type: agent
+        fqdn: "{{ inventory_name }}.geiger.cloud"
 verifier:
   name: ansible

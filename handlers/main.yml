@@ -1,2 +1,7 @@
 ---
 # handlers file for rke2
+- name: Restart rke2-{{ node_type }}
+  ansible.builtin.service:
+    name: "rke2-{{ node_type }}"
+    state: restarted
+    enabled: true

@@ -1,0 +1,74 @@
+---
+# Master.yml
+# Check Conf file exists
+- name: Check if conf file exists
+  ansible.builtin.stat:
+    path: "{{ config_file }}"
+  register: config_file_stat
+
+# TODO: Task to get kubernetes Version
+
+# Read Configuration file for RKE2 and save its value to fact as YAML
+- name: When conf file exists read token to facts
+  when: config_file_stat.stat.exists 
+  block:
+    - name: Read RKE2 Config File {{ config_file }}
+      ansible.builtin.slurp:
+       src: "{{ config_file }}"
+      register: rke2_config
+    - name: Set token to facts        
+      ansible.builtin.set_fact:
+        rke2: "{{ rke2_config.content | b64decode | from_yaml_all }}"  
+
+# Create Directory for Config
+- name: Create config directory
+  ansible.builtin.file:
+    path: "{{ config_path }}"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+
+# Download the install Script
+- name: Download RKE2 install.sh
+  ansible.builtin.get_url:
+    url: "{{ channel_url }}"
+    dest: "{{ install_sh }}"
+    mode: 0755
+    owner: root
+    group: root
+
+# Set token file. If token in host var is not set
+- name: RKE2 Token issue
+  ansible.builtin.set_fact:
+    token: "{{ hostvars[item]['rke2']['token'] | default(lookup('community.general.random_string', special=false, length=33)) }}"
+  loop: "{{ play_hosts }}"
+
+# Template Config file with the Values from default or passed by playbook and Inventorie
+- name: Template Config file
+  ansible.builtin.template:
+    src: "{{ template_config }}"
+    dest: "{{ config_file }}"
+    mode: 0644
+    owner: root
+    group: root
+
+
+# Install Script for Server
+- name: Execute install Script
+  ansible.builtin.command:
+    cmd: "{{ install_sh }}"
+  register: install_sh_out
+  # TODO: Skip task when version is of kubernetes is the same
+  environment:
+    INSTALL_RKE2_TYPE: "{{ node_type }}"
+    INSTALL_RKE2_CHANNEL: "{{ channel }}"
+  changed_when: '"[INFO]" in install_sh_out.stdout'
+  notify:
+    - "Restart rke2-{{ node_type }}"
+
+# - name: Replace 127.0.0.1 in kube.conf
+#   ansible.builtin.replace:
+#       path: /etc/rancher/rke2/rke2.yaml
+#       regexp: "127.0.0.1"
+#       replace: "{{ ansible_host }}"
