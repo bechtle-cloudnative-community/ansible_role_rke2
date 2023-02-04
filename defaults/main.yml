@@ -3,7 +3,10 @@
 # Definition for type of rke Node
 # For Server(Control Plane): server
 # For Agent(Worker): agent
-node_type: server
+rke2_type: server
+primary: false
+
+check_update: true
 
 # Set the RKE2 Version
 # default is stable. for more Information:
@@ -32,8 +35,7 @@ bind_address: 0.0.0.0
 #  - A layer 4 (TCP) load balancer
 #  - Round-robin DNS
 #  - Virtual or elastic IP addresses
-cluster_fqdn: debian-rke-server-1
-
+cluster_fqdn: ansible-rke2-server-1.geiger.cloud
 # Subject alternative names for the Server and Cluster API to accept
 # FQDN or IPv4 of the Server Nodes
 tls_san:
@@ -47,3 +49,4 @@ service_cidr: "{{ cluster_cidr }}"
 template_config: config.yaml.j2
 config_path: /etc/rancher/rke2
 config_file: "{{ config_path }}/config.yaml"
+token_file: /var/lib/rancher/rke2/server/node-token

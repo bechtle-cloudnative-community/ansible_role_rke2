@@ -1,0 +1,30 @@
+---
+# get actual channel version
+- name: Get channel list
+  ansible.builtin.uri:
+    url: https://update.rke2.io/v1-release/channels
+    method: GET
+    follow_redirects: true
+    return_content: true
+    body: json
+  register: rke2_version_list
+  
+- name: Set version as fact
+  ansible.builtin.set_fact:
+    rke2_latest_version: "{{ rke2_version_list.content | from_json | community.general.json_query(rke2_version_query)}}"
+  vars:
+    rke2_version_query: "data[?id=='{{ channel }}'].latest"
+
+- name: Get installed version from node 
+  ansible.builtin.shell:
+    cmd: rke2 --version | cut -d ' ' -f 3 | head -n1 || echo "not installed"
+  changed_when: '"not installed" in rke2_installed_version.stdout '
+  register: rke2_installed_version
+
+- name: Change update Status  
+  ansible.builtin.set_fact:
+    update: true
+  when:
+    - check_update 
+    - 'rke2_latest_version[0] != rke2_installed_version.stdout or rke2_installed_version.changed '
+    

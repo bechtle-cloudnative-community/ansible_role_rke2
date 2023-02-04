@@ -5,6 +5,10 @@
   ansible.builtin.include_tasks:
     file: prepare.yml
 
+- name: Solve Requirements throupth prepare.yml 
+  ansible.builtin.include_tasks:
+    file: rkeversion.yml
+
 # Include of master.yml - this file doing the install of the server node of RKE2
 - name: Install RKE2 Server node
   ansible.builtin.include_tasks:

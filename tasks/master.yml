@@ -1,25 +1,6 @@
 ---
 # Master.yml
 # Check Conf file exists
-- name: Check if conf file exists
-  ansible.builtin.stat:
-    path: "{{ config_file }}"
-  register: config_file_stat
-
-# TODO: Task to get kubernetes Version
-
-# Read Configuration file for RKE2 and save its value to fact as YAML
-- name: When conf file exists read token to facts
-  when: config_file_stat.stat.exists 
-  block:
-    - name: Read RKE2 Config File {{ config_file }}
-      ansible.builtin.slurp:
-       src: "{{ config_file }}"
-      register: rke2_config
-    - name: Set token to facts        
-      ansible.builtin.set_fact:
-        rke2: "{{ rke2_config.content | b64decode | from_yaml_all }}"  
-
 # Create Directory for Config
 - name: Create config directory
   ansible.builtin.file:
@@ -29,6 +10,39 @@
     owner: root
     group: root
 
+# RKE2 Check Token file exists
+- name: Check RKE2 Token File
+  delegate_to: "{{ item }}"
+  ansible.builtin.stat:
+    path: "{{ token_file }}"
+  register: token_stat
+  loop: "{{ play_hosts }}"
+
+# RKE2 Token auslesen
+- name: Read RKE2 Token File 
+  delegate_to: "{{ token_node.item }}"
+  ansible.builtin.slurp:
+    path: "{{ token_file }}"
+  when: token_node.stat.exists
+  register: token_b64
+  loop: "{{ token_stat.results }}"
+  loop_control:
+    loop_var: token_node
+
+# Read Token value to facts
+- name: Set token to facts    
+  ansible.builtin.set_fact:
+    token: "{{ item.content | b64decode }}" 
+    rke2_server_active: true 
+  when: item.content is defined
+  loop: "{{ token_b64.results }}"
+
+- name: RKE2 Initial Token Setup by unexistent
+  ansible.builtin.set_fact:
+    token: "{{ lookup('community.general.random_string', special=false, length=33) }}"
+    rke2_server_active: false 
+  when: token is undefined
+
 # Download the install Script
 - name: Download RKE2 install.sh
   ansible.builtin.get_url:
@@ -37,12 +51,7 @@
     mode: 0755
     owner: root
     group: root
-
-# Set token file. If token in host var is not set
-- name: RKE2 Token issue
-  ansible.builtin.set_fact:
-    token: "{{ hostvars[item]['rke2']['token'] | default(lookup('community.general.random_string', special=false, length=33)) }}"
-  loop: "{{ play_hosts }}"
+  when: update
 
 # Template Config file with the Values from default or passed by playbook and Inventorie
 - name: Template Config file
@@ -52,23 +61,24 @@
     mode: 0644
     owner: root
     group: root
-
+  notify:
+    - "Restart rke2-{{ rke2_type }}"
 
 # Install Script for Server
 - name: Execute install Script
   ansible.builtin.command:
     cmd: "{{ install_sh }}"
   register: install_sh_out
-  # TODO: Skip task when version is of kubernetes is the same
   environment:
-    INSTALL_RKE2_TYPE: "{{ node_type }}"
+    INSTALL_RKE2_TYPE: "{{ rke2_type }}"
     INSTALL_RKE2_CHANNEL: "{{ channel }}"
-  changed_when: '"[INFO]" in install_sh_out.stdout'
+  when: update
   notify:
-    - "Restart rke2-{{ node_type }}"
+    - "Restart rke2-{{ rke2_type }}"
 
-# - name: Replace 127.0.0.1 in kube.conf
-#   ansible.builtin.replace:
-#       path: /etc/rancher/rke2/rke2.yaml
-#       regexp: "127.0.0.1"
-#       replace: "{{ ansible_host }}"
+- name: Verfiy RKE2 systemd service is started and enabled
+  ansible.builtin.service:
+    name: "rke2-{{ rke2_type }}"
+    enabled: true
+    state: started
+

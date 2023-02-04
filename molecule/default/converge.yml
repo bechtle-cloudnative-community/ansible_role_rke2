@@ -1,7 +1,8 @@
 ---
 - name: Converge
   hosts: all
+  serial: 1
   tasks:
     - name: "Include bechtle.rke2"
-      include_role:
+      ansible.builtin.include_role:
         name: "bechtle.rke2"

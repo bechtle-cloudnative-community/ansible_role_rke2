@@ -1,7 +1,14 @@
 # {{ ansible_managed }}
-# server: https://{{ cluster_fqdn }}
+# Host to Connect and Auth Token
+{% if rke2_server_active and not primary %}
+server: https://{{ cluster_fqdn }}:9345
+{% endif %}
 token: {{ token }}
+
+{% if rke2_type == "server" %}
+# server Configuration Part
 tls-san: {{ tls_san }}
-# cluster-cidr: {{ cluster_cidr}}
-#service-cidr: {{ cluster_cidr}}
-#bind-address: {{ bind_address }}
+cluster-cidr: {{ cluster_cidr}}
+service-cidr: {{ cluster_cidr}}
+bind-address: {{ bind_address }}
+{% endif %}
