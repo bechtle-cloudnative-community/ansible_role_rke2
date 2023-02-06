@@ -3,7 +3,12 @@
 {% if rke2_server_active and not primary %}
 server: https://{{ cluster_fqdn }}:9345
 {% endif %}
+
+{% if primary %}
+token: {{ token | split(':') | last }}
+{% else %}
 token: {{ token }}
+{% endif %}
 
 {% if rke2_type == "server" %}
 # server Configuration Part

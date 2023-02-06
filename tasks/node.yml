@@ -1,0 +1,46 @@
+---
+# Master.yml
+# Check Conf file exists
+# Create Directory for Config
+- name: Create config directory
+  ansible.builtin.file:
+    path: "{{ config_path }}"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+
+# RKE2 Check Token file exists
+- name: Check RKE2 Token File
+  delegate_to: "{{ item }}"
+  ansible.builtin.stat:
+    path: "{{ token_file }}"
+  register: token_stat
+  loop: "{{ play_hosts }}"
+
+# RKE2 Token auslesen
+- name: Read RKE2 Token File 
+  delegate_to: "{{ token_node.item }}"
+  ansible.builtin.slurp:
+    path: "{{ token_file }}"
+  when: token_node.stat.exists
+  register: token_b64
+  loop: "{{ token_stat.results }}"
+  loop_control:
+    loop_var: token_node
+
+# Read Token value to facts
+- name: Set token to facts    
+  ansible.builtin.set_fact:
+    token: "{{ item.content | b64decode }}" 
+    rke2_server_active: true 
+  when: item.content is defined
+  loop: "{{ token_b64.results }}"
+
+- name: RKE2 Initial Token Setup by unexistent
+  ansible.builtin.set_fact:
+    token: "{{ lookup('community.general.random_string', special=false, length=33) }}"
+    rke2_server_active: false 
+  when: 
+    - token is undefined
+    - primary

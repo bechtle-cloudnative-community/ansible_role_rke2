@@ -10,21 +10,25 @@ driver:
     default_box: 'generic/dabian11'
 platforms:
   - name: ansible-rke2-server-1
-    hostname: ansible-rke2-server-1.geiger.cloud
+    hostname: ansible-rke2-server-1.example.com
     box: 'generic/debian11'
     interfaces:
       - network_name: private_network
         ip: 192.168.10.10
     memory: 4096
     cpus: 2
+    groups:
+      - server
   - name: ansible-rke2-agent-1
-    hostname: ansible-rke2-agent-1.geiger.cloud
+    hostname: ansible-rke2-agent-1.example.com
     box: 'generic/debian11'
     interfaces:
       - network_name: private_network
         ip: 192.168.10.10
     memory: 4096
     cpus: 2
+    groups:
+      - agent
 provisioner:
   name: ansible
   connection_options:
@@ -36,9 +40,9 @@ provisioner:
       ansible-rke2-server-1:        
         rke2_type: server
         primary: true
-        fqdn: "{{ inventory_name }}.geiger.cloud"
+        fqdn: "{{ inventory_name }}.example.com"
       ansible-rke2-agent-1:
         rke2_type: agent
-        fqdn: "{{ inventory_name }}.geiger.cloud"
+        fqdn: "{{ inventory_name }}.example.com"
 verifier:
   name: ansible

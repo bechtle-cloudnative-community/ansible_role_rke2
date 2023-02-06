@@ -4,13 +4,43 @@
 - name: Solve Requirements throupth prepare.yml 
   ansible.builtin.include_tasks:
     file: prepare.yml
-
+#
 - name: Solve Requirements throupth prepare.yml 
   ansible.builtin.include_tasks:
     file: rkeversion.yml
 
 # Include of master.yml - this file doing the install of the server node of RKE2
-- name: Install RKE2 Server node
-  ansible.builtin.include_tasks:
-    file: master.yml
-  when: rke2_type == 'server'
+- name: Manage RKE2 Server node primary
+  when: '"server" in rke2_type and primary' 
+  block:
+  # Include of master.yml - this file doing the install of the server node of RKE2
+  - name: Install RKE2 Server node
+    ansible.builtin.include_tasks:
+      file: node.yml
+  - name: Manage RKE2
+    ansible.builtin.include_tasks:
+      file: rke2.yml
+
+# Include of master.yml - this file doing the install of the server node of RKE2
+- name: Manage RKE2 Server node secondary
+  when: '"server" in rke2_type and not primary'
+  block:
+  # Include of master.yml - this file doing the install of the server node of RKE2
+  - name: Install RKE2 Server node
+    ansible.builtin.include_tasks:
+      file: node.yml
+  - name: Manage RKE2
+    ansible.builtin.include_tasks:
+      file: rke2.yml
+
+# Include of master.yml - this file doing the install of the server node of RKE2
+- name: Manage RKE2 Agent node secondary
+  when: '"agent" in rke2_type'
+  block:
+  # Include of master.yml - this file doing the install of the server node of RKE2
+  - name: Install RKE2 Server node
+    ansible.builtin.include_tasks:
+      file: node.yml
+  - name: Manage RKE2
+    ansible.builtin.include_tasks:
+      file: rke2.yml

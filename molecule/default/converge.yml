@@ -1,8 +1,15 @@
 ---
 - name: Converge
   hosts: all
-  serial: 1
   tasks:
+    - name: "Copy correct DNS Server"
+      ansible.builtin.copy:
+        content: "nameserver 192.168.121.1"
+        dest: /etc/resolv.conf
+        mode: 0644
+        owner: root
+        group: root
+
     - name: "Include bechtle.rke2"
       ansible.builtin.include_role:
         name: "bechtle.rke2"
