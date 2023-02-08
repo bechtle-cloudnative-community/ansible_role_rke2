@@ -1,19 +1,17 @@
 # {{ ansible_managed }}
 # Host to Connect and Auth Token
-{% if rke2_server_active and not primary %}
+{% if not primary %}
 server: https://{{ cluster_fqdn }}:9345
 {% endif %}
-
-{% if primary %}
-token: {{ token | split(':') | last }}
-{% else %}
 token: {{ token }}
-{% endif %}
-
 {% if rke2_type == "server" %}
 # server Configuration Part
 tls-san: {{ tls_san }}
 cluster-cidr: {{ cluster_cidr}}
 service-cidr: {{ cluster_cidr}}
+{% if bind_address | ansible.utils.ipaddr('host')  and bind_address != '0.0.0.0' %}
 bind-address: {{ bind_address }}
+{% endif %}
+node-taint:
+  - "CriticalAddonsOnly=true:NoExecute"
 {% endif %}

@@ -1,0 +1,385 @@
+2023-02-06T20:54:06.562069+00:00 INFO 'ansible_navigator.setup_logger' New ansible-navigator instance, logging initialized
+2023-02-06T20:54:06.562361+00:00 INFO 'ansible_navigator.setup_logger' New ansible-runner instance, logging initialized
+2023-02-06T20:54:06.562402+00:00 DEBUG 'ansible_navigator.main' aiohttp==3.8.3 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562426+00:00 DEBUG 'ansible_navigator.main' aiosignal==1.2.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562449+00:00 DEBUG 'ansible_navigator.main' airdrop-ng==1.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562469+00:00 DEBUG 'ansible_navigator.main' airgraph-ng==1.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562490+00:00 DEBUG 'ansible_navigator.main' ansible-builder==1.2.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562510+00:00 DEBUG 'ansible_navigator.main' ansible-compat==3.0.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562529+00:00 DEBUG 'ansible_navigator.main' ansible-core==2.14.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562550+00:00 DEBUG 'ansible_navigator.main' ansible-lint==6.8.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562571+00:00 DEBUG 'ansible_navigator.main' ansible-navigator==2.2.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562591+00:00 DEBUG 'ansible_navigator.main' ansible-runner==2.3.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562610+00:00 DEBUG 'ansible_navigator.main' ansible==7.2.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562630+00:00 DEBUG 'ansible_navigator.main' anyio==3.6.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562650+00:00 DEBUG 'ansible_navigator.main' anytree==2.8.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562670+00:00 DEBUG 'ansible_navigator.main' apparmor==3.1.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562690+00:00 DEBUG 'ansible_navigator.main' appdirs==1.4.4 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562710+00:00 DEBUG 'ansible_navigator.main' argon2-cffi-bindings==21.2.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562730+00:00 DEBUG 'ansible_navigator.main' argon2-cffi==21.3.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562751+00:00 DEBUG 'ansible_navigator.main' arrow==1.2.3 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562774+00:00 DEBUG 'ansible_navigator.main' asgiref==3.5.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562794+00:00 DEBUG 'ansible_navigator.main' asttokens==2.0.8 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562814+00:00 DEBUG 'ansible_navigator.main' async-timeout==4.0.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562834+00:00 DEBUG 'ansible_navigator.main' attrs==22.2.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562861+00:00 DEBUG 'ansible_navigator.main' autocommand==2.2.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562882+00:00 DEBUG 'ansible_navigator.main' autopep8==1.7.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562903+00:00 DEBUG 'ansible_navigator.main' babel==2.10.3 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562923+00:00 DEBUG 'ansible_navigator.main' backcall==0.2.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562942+00:00 DEBUG 'ansible_navigator.main' bcrypt==4.0.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562960+00:00 DEBUG 'ansible_navigator.main' beaker==1.12.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.562979+00:00 DEBUG 'ansible_navigator.main' beautifulsoup4==4.11.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.562997+00:00 DEBUG 'ansible_navigator.main' binaryornot==0.4.4 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563016+00:00 DEBUG 'ansible_navigator.main' bindep==2.11.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563034+00:00 DEBUG 'ansible_navigator.main' black==22.10.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563056+00:00 DEBUG 'ansible_navigator.main' bleach==5.0.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563074+00:00 DEBUG 'ansible_navigator.main' bracex==2.3.post1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563092+00:00 DEBUG 'ansible_navigator.main' brlapi==0.8.4 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563110+00:00 DEBUG 'ansible_navigator.main' btrfsutil==6.1.3 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563128+00:00 DEBUG 'ansible_navigator.main' cachecontrol==0.12.11 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563145+00:00 DEBUG 'ansible_navigator.main' cached-property==1.5.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563163+00:00 DEBUG 'ansible_navigator.main' cerberus==1.3.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563180+00:00 DEBUG 'ansible_navigator.main' certifi==2022.12.7 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563198+00:00 DEBUG 'ansible_navigator.main' cffi==1.15.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563216+00:00 DEBUG 'ansible_navigator.main' cfgv==3.3.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563234+00:00 DEBUG 'ansible_navigator.main' chardet==5.1.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563252+00:00 DEBUG 'ansible_navigator.main' charset-normalizer==2.0.12 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563271+00:00 DEBUG 'ansible_navigator.main' click-help-colors==0.9.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563290+00:00 DEBUG 'ansible_navigator.main' click==8.1.3 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563308+00:00 DEBUG 'ansible_navigator.main' colorama==0.4.6 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563325+00:00 DEBUG 'ansible_navigator.main' commonmark==0.9.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563342+00:00 DEBUG 'ansible_navigator.main' contextlib2==21.6.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563360+00:00 DEBUG 'ansible_navigator.main' cookiecutter==2.1.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563379+00:00 DEBUG 'ansible_navigator.main' cryptography==36.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563398+00:00 DEBUG 'ansible_navigator.main' cycler==0.11.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563417+00:00 DEBUG 'ansible_navigator.main' cython==0.29.33 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563436+00:00 DEBUG 'ansible_navigator.main' debugpy==1.6.3 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563454+00:00 DEBUG 'ansible_navigator.main' decorator==5.1.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563473+00:00 DEBUG 'ansible_navigator.main' defusedxml==0.7.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563493+00:00 DEBUG 'ansible_navigator.main' distlib==0.3.6 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563511+00:00 DEBUG 'ansible_navigator.main' distro==1.8.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563529+00:00 DEBUG 'ansible_navigator.main' django==4.1.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563547+00:00 DEBUG 'ansible_navigator.main' dnspython==2.2.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563565+00:00 DEBUG 'ansible_navigator.main' docker-pycreds==0.4.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563582+00:00 DEBUG 'ansible_navigator.main' docker==6.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563600+00:00 DEBUG 'ansible_navigator.main' dockerpty==0.4.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563618+00:00 DEBUG 'ansible_navigator.main' docopt==0.6.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563636+00:00 DEBUG 'ansible_navigator.main' docutils==0.19 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563654+00:00 DEBUG 'ansible_navigator.main' enrich==1.2.8.dev0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563673+00:00 DEBUG 'ansible_navigator.main' entrypoints==0.4 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563690+00:00 DEBUG 'ansible_navigator.main' executing==1.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563707+00:00 DEBUG 'ansible_navigator.main' fastjsonschema==2.16.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563725+00:00 DEBUG 'ansible_navigator.main' filelock==3.8.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563744+00:00 DEBUG 'ansible_navigator.main' fio-plot==1.0.21 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563762+00:00 DEBUG 'ansible_navigator.main' flake8==5.0.4 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563781+00:00 DEBUG 'ansible_navigator.main' flask==2.2.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563800+00:00 DEBUG 'ansible_navigator.main' fonttools==4.37.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563818+00:00 DEBUG 'ansible_navigator.main' frozenlist==1.3.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563837+00:00 DEBUG 'ansible_navigator.main' future==0.18.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563855+00:00 DEBUG 'ansible_navigator.main' html5lib==1.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563874+00:00 DEBUG 'ansible_navigator.main' identify==2.5.5 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563892+00:00 DEBUG 'ansible_navigator.main' idna==3.4 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563911+00:00 DEBUG 'ansible_navigator.main' image==1.5.33 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563929+00:00 DEBUG 'ansible_navigator.main' importlib-metadata==4.12.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563947+00:00 DEBUG 'ansible_navigator.main' inflect==6.0.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.563966+00:00 DEBUG 'ansible_navigator.main' iniconfig==1.1.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.563984+00:00 DEBUG 'ansible_navigator.main' ipykernel==6.15.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564002+00:00 DEBUG 'ansible_navigator.main' ipython-genutils==0.2.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564020+00:00 DEBUG 'ansible_navigator.main' ipython==8.5.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564039+00:00 DEBUG 'ansible_navigator.main' itsdangerous==2.1.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564058+00:00 DEBUG 'ansible_navigator.main' jaraco.context==4.3.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564077+00:00 DEBUG 'ansible_navigator.main' jaraco.functools==3.5.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564095+00:00 DEBUG 'ansible_navigator.main' jaraco.text==3.11.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564113+00:00 DEBUG 'ansible_navigator.main' jedi==0.18.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564131+00:00 DEBUG 'ansible_navigator.main' jinja2-time==0.2.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564149+00:00 DEBUG 'ansible_navigator.main' jinja2==3.1.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564170+00:00 DEBUG 'ansible_navigator.main' jmespath==1.0.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564192+00:00 DEBUG 'ansible_navigator.main' json5==0.9.10 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564213+00:00 DEBUG 'ansible_navigator.main' jsonpointer==2.3 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564234+00:00 DEBUG 'ansible_navigator.main' jsonschema==4.15.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564255+00:00 DEBUG 'ansible_navigator.main' jupyter-client==7.3.5 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564277+00:00 DEBUG 'ansible_navigator.main' jupyter-core==4.11.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564297+00:00 DEBUG 'ansible_navigator.main' jupyter-server==1.21.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564315+00:00 DEBUG 'ansible_navigator.main' jupyterlab-pygments==0.2.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564333+00:00 DEBUG 'ansible_navigator.main' jupyterlab-server==2.16.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564351+00:00 DEBUG 'ansible_navigator.main' jupyterlab==3.4.8 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564369+00:00 DEBUG 'ansible_navigator.main' kiwisolver==1.4.4 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564388+00:00 DEBUG 'ansible_navigator.main' lensfun==0.3.3 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564406+00:00 DEBUG 'ansible_navigator.main' libapparmor==3.1.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564424+00:00 DEBUG 'ansible_navigator.main' libfdt==1.6.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564443+00:00 DEBUG 'ansible_navigator.main' libvirt-python==9.0.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564461+00:00 DEBUG 'ansible_navigator.main' lockfile==0.12.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564479+00:00 DEBUG 'ansible_navigator.main' louis==3.24.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564497+00:00 DEBUG 'ansible_navigator.main' lxml==4.9.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564515+00:00 DEBUG 'ansible_navigator.main' mako==1.2.4 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564534+00:00 DEBUG 'ansible_navigator.main' markdown-it-py==2.1.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564552+00:00 DEBUG 'ansible_navigator.main' markdown==3.4.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564571+00:00 DEBUG 'ansible_navigator.main' markupsafe==2.1.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564589+00:00 DEBUG 'ansible_navigator.main' matplotlib-inline==0.1.6 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564607+00:00 DEBUG 'ansible_navigator.main' matplotlib==3.5.3 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564626+00:00 DEBUG 'ansible_navigator.main' mccabe==0.7.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564644+00:00 DEBUG 'ansible_navigator.main' mdurl==0.1.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564663+00:00 DEBUG 'ansible_navigator.main' meson==1.0.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564682+00:00 DEBUG 'ansible_navigator.main' mistune==2.0.4 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564700+00:00 DEBUG 'ansible_navigator.main' molecule-docker==2.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564718+00:00 DEBUG 'ansible_navigator.main' molecule-libvirt==0.0.6 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564737+00:00 DEBUG 'ansible_navigator.main' molecule-plugins==23.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564755+00:00 DEBUG 'ansible_navigator.main' molecule-vagrant==1.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564773+00:00 DEBUG 'ansible_navigator.main' molecule==4.0.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564792+00:00 DEBUG 'ansible_navigator.main' more-itertools==8.14.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564810+00:00 DEBUG 'ansible_navigator.main' msgpack==1.0.4 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.564829+00:00 DEBUG 'ansible_navigator.main' multidict==6.0.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564847+00:00 DEBUG 'ansible_navigator.main' mypy-extensions==0.4.3 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564865+00:00 DEBUG 'ansible_navigator.main' nbclassic==0.4.6 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564883+00:00 DEBUG 'ansible_navigator.main' nbclient==0.6.7 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564904+00:00 DEBUG 'ansible_navigator.main' nbconvert==7.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564922+00:00 DEBUG 'ansible_navigator.main' nbformat==5.4.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564940+00:00 DEBUG 'ansible_navigator.main' ndg-httpsclient==0.5.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564958+00:00 DEBUG 'ansible_navigator.main' nest-asyncio==1.5.5 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564976+00:00 DEBUG 'ansible_navigator.main' netaddr==0.8.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.564995+00:00 DEBUG 'ansible_navigator.main' netifaces==0.11.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565013+00:00 DEBUG 'ansible_navigator.main' netsnmp-python==1.0a1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565031+00:00 DEBUG 'ansible_navigator.main' nftables==0.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565050+00:00 DEBUG 'ansible_navigator.main' nodeenv==1.7.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565068+00:00 DEBUG 'ansible_navigator.main' notebook-shim==0.1.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565086+00:00 DEBUG 'ansible_navigator.main' notebook==6.4.12 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565104+00:00 DEBUG 'ansible_navigator.main' nspektr==0.4.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565121+00:00 DEBUG 'ansible_navigator.main' nsx-policy-python-sdk==4.0.1.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565138+00:00 DEBUG 'ansible_navigator.main' nsx-python-sdk==4.0.1.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565156+00:00 DEBUG 'ansible_navigator.main' nsx-vmc-aws-integration-python-sdk==4.0.1.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565174+00:00 DEBUG 'ansible_navigator.main' nsx-vmc-policy-python-sdk==4.0.1.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565193+00:00 DEBUG 'ansible_navigator.main' numpy==1.23.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565211+00:00 DEBUG 'ansible_navigator.main' onigurumacffi==1.2.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565229+00:00 DEBUG 'ansible_navigator.main' ordered-set==4.1.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565247+00:00 DEBUG 'ansible_navigator.main' packaging==23.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565265+00:00 DEBUG 'ansible_navigator.main' pandocfilters==1.5.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565283+00:00 DEBUG 'ansible_navigator.main' paramiko==2.11.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565301+00:00 DEBUG 'ansible_navigator.main' parsley==1.3 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565319+00:00 DEBUG 'ansible_navigator.main' parso==0.8.3 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565338+00:00 DEBUG 'ansible_navigator.main' pathspec==0.10.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565356+00:00 DEBUG 'ansible_navigator.main' pbr==5.11.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565373+00:00 DEBUG 'ansible_navigator.main' pep517==0.13.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565391+00:00 DEBUG 'ansible_navigator.main' pexpect==4.8.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565408+00:00 DEBUG 'ansible_navigator.main' pickleshare==0.7.5 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565427+00:00 DEBUG 'ansible_navigator.main' pika==1.3.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565444+00:00 DEBUG 'ansible_navigator.main' pillow==9.2.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565462+00:00 DEBUG 'ansible_navigator.main' pip==22.3.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565482+00:00 DEBUG 'ansible_navigator.main' platformdirs==2.5.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565500+00:00 DEBUG 'ansible_navigator.main' pluggy==1.0.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565518+00:00 DEBUG 'ansible_navigator.main' ply==3.11 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565536+00:00 DEBUG 'ansible_navigator.main' poyo==0.5.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565554+00:00 DEBUG 'ansible_navigator.main' pre-commit==2.20.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565572+00:00 DEBUG 'ansible_navigator.main' progress==1.6 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565590+00:00 DEBUG 'ansible_navigator.main' prometheus-client==0.14.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565608+00:00 DEBUG 'ansible_navigator.main' prompt-toolkit==3.0.31 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565626+00:00 DEBUG 'ansible_navigator.main' psutil==5.9.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565644+00:00 DEBUG 'ansible_navigator.main' ptyprocess==0.7.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565661+00:00 DEBUG 'ansible_navigator.main' pure-eval==0.2.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565680+00:00 DEBUG 'ansible_navigator.main' pwquality==1.4.5 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565698+00:00 DEBUG 'ansible_navigator.main' py==1.11.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565716+00:00 DEBUG 'ansible_navigator.main' pyan3==1.2.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565734+00:00 DEBUG 'ansible_navigator.main' pyasn1==0.4.8 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565752+00:00 DEBUG 'ansible_navigator.main' pycairo==1.23.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565770+00:00 DEBUG 'ansible_navigator.main' pycdlib==1.13.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565787+00:00 DEBUG 'ansible_navigator.main' pycodestyle==2.9.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565805+00:00 DEBUG 'ansible_navigator.main' pycparser==2.21 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565823+00:00 DEBUG 'ansible_navigator.main' pydantic==1.10.4 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565842+00:00 DEBUG 'ansible_navigator.main' pyflakes==2.5.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565860+00:00 DEBUG 'ansible_navigator.main' pygments==2.14.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565878+00:00 DEBUG 'ansible_navigator.main' pygobject==3.42.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565897+00:00 DEBUG 'ansible_navigator.main' pynacl==1.5.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565915+00:00 DEBUG 'ansible_navigator.main' pyopenssl==22.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565933+00:00 DEBUG 'ansible_navigator.main' pyparsing==3.0.9 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565952+00:00 DEBUG 'ansible_navigator.main' pyrsistent==0.19.3 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.565969+00:00 DEBUG 'ansible_navigator.main' pytest-testinfra==6.8.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.565987+00:00 DEBUG 'ansible_navigator.main' pytest==7.1.3 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566005+00:00 DEBUG 'ansible_navigator.main' python-daemon==2.3.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566023+00:00 DEBUG 'ansible_navigator.main' python-dateutil==2.8.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566042+00:00 DEBUG 'ansible_navigator.main' python-dotenv==0.21.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566060+00:00 DEBUG 'ansible_navigator.main' python-hpilo==4.4.3 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566081+00:00 DEBUG 'ansible_navigator.main' python-sane==2.9.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566100+00:00 DEBUG 'ansible_navigator.main' python-slugify==8.0.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566118+00:00 DEBUG 'ansible_navigator.main' python-vagrant==1.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566136+00:00 DEBUG 'ansible_navigator.main' pytz==2022.4 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566154+00:00 DEBUG 'ansible_navigator.main' pyvmomi==7.0.3 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566172+00:00 DEBUG 'ansible_navigator.main' pyxdg==0.28 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566190+00:00 DEBUG 'ansible_navigator.main' pyyaml==6.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566209+00:00 DEBUG 'ansible_navigator.main' pyzmq==23.2.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566226+00:00 DEBUG 'ansible_navigator.main' requests==2.27.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566245+00:00 DEBUG 'ansible_navigator.main' requirements-parser==0.5.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566264+00:00 DEBUG 'ansible_navigator.main' resolvelib==0.9.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566282+00:00 DEBUG 'ansible_navigator.main' retrying==1.3.3 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566300+00:00 DEBUG 'ansible_navigator.main' rfc3987==1.3.8 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566318+00:00 DEBUG 'ansible_navigator.main' rich==12.5.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566336+00:00 DEBUG 'ansible_navigator.main' ruamel.yaml.clib==0.2.6 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566355+00:00 DEBUG 'ansible_navigator.main' ruamel.yaml==0.17.21 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566373+00:00 DEBUG 'ansible_navigator.main' selinux==0.2.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566392+00:00 DEBUG 'ansible_navigator.main' send2trash==1.8.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566410+00:00 DEBUG 'ansible_navigator.main' setproctitle==1.3.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566428+00:00 DEBUG 'ansible_navigator.main' setuptools==62.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566446+00:00 DEBUG 'ansible_navigator.main' six==1.16.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566464+00:00 DEBUG 'ansible_navigator.main' sniffio==1.3.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566482+00:00 DEBUG 'ansible_navigator.main' soupsieve==2.3.2.post1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566500+00:00 DEBUG 'ansible_navigator.main' sqlparse==0.4.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566518+00:00 DEBUG 'ansible_navigator.main' sssdconfig==2.8.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566536+00:00 DEBUG 'ansible_navigator.main' stack-data==0.5.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566554+00:00 DEBUG 'ansible_navigator.main' subprocess-tee==0.4.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566571+00:00 DEBUG 'ansible_navigator.main' tabulate==0.8.10 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566589+00:00 DEBUG 'ansible_navigator.main' tbb==2021.6.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566607+00:00 DEBUG 'ansible_navigator.main' team==1.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566624+00:00 DEBUG 'ansible_navigator.main' tenacity==8.1.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566642+00:00 DEBUG 'ansible_navigator.main' terminado==0.15.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566660+00:00 DEBUG 'ansible_navigator.main' text-unidecode==1.3 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566679+00:00 DEBUG 'ansible_navigator.main' texttable==1.6.7 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566700+00:00 DEBUG 'ansible_navigator.main' tinycss2==1.1.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566719+00:00 DEBUG 'ansible_navigator.main' toml==0.10.2 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566739+00:00 DEBUG 'ansible_navigator.main' tomli==2.0.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566758+00:00 DEBUG 'ansible_navigator.main' tornado==6.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566777+00:00 DEBUG 'ansible_navigator.main' tox==3.26.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566796+00:00 DEBUG 'ansible_navigator.main' traitlets==5.3.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566815+00:00 DEBUG 'ansible_navigator.main' trove-classifiers==2023.1.20 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566835+00:00 DEBUG 'ansible_navigator.main' types-setuptools==65.5.0.3 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566854+00:00 DEBUG 'ansible_navigator.main' typing-extensions==4.4.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566872+00:00 DEBUG 'ansible_navigator.main' tzdata==2022.6 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566891+00:00 DEBUG 'ansible_navigator.main' uc-micro-py==1.0.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566910+00:00 DEBUG 'ansible_navigator.main' urllib3==1.26.12 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566929+00:00 DEBUG 'ansible_navigator.main' validate-pyproject==0.12.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.566947+00:00 DEBUG 'ansible_navigator.main' vapi-client-bindings==4.0.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566966+00:00 DEBUG 'ansible_navigator.main' vapi-common-client==2.37.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.566985+00:00 DEBUG 'ansible_navigator.main' vapi-runtime==2.37.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.567003+00:00 DEBUG 'ansible_navigator.main' vconnector==0.6.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.567022+00:00 DEBUG 'ansible_navigator.main' virtualenv==20.16.5 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.567040+00:00 DEBUG 'ansible_navigator.main' vmc-client-bindings==1.61.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.567059+00:00 DEBUG 'ansible_navigator.main' vmc-draas-client-bindings==1.20.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.567077+00:00 DEBUG 'ansible_navigator.main' vpoller==0.7.3 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.567096+00:00 DEBUG 'ansible_navigator.main' vsphere-automation-sdk==1.80.0 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.567114+00:00 DEBUG 'ansible_navigator.main' wcmatch==8.4.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.567133+00:00 DEBUG 'ansible_navigator.main' wcwidth==0.2.5 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.567151+00:00 DEBUG 'ansible_navigator.main' webcolors==1.12 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.567170+00:00 DEBUG 'ansible_navigator.main' webencodings==0.5.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.567188+00:00 DEBUG 'ansible_navigator.main' websocket-client==1.5.1 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.567206+00:00 DEBUG 'ansible_navigator.main' werkzeug==2.2.2 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.567225+00:00 DEBUG 'ansible_navigator.main' wheel==0.38.4 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.567243+00:00 DEBUG 'ansible_navigator.main' yamllint==1.27.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.567262+00:00 DEBUG 'ansible_navigator.main' yarl==1.8.1 /home/dago/.local/lib/python3.10/site-packages
+2023-02-06T20:54:06.567281+00:00 DEBUG 'ansible_navigator.main' zipp==3.12.0 /usr/lib/python3.10/site-packages
+2023-02-06T20:54:06.567301+00:00 DEBUG 'ansible_navigator.main' Share directory '/home/dago/.local/lib/python3.10/share/ansible_navigator' not found (development path)
+2023-02-06T20:54:06.567320+00:00 DEBUG 'ansible_navigator.main' Share directory '/home/dago/.local/share/ansible_navigator' found (userbase)
+2023-02-06T20:54:06.567339+00:00 DEBUG 'ansible_navigator.main' Default collection_doc_cache_path set to: /home/dago/.cache/ansible-navigator/collection_doc_cache.db
+2023-02-06T20:54:06.567358+00:00 DEBUG 'ansible_navigator.main' EDITOR environment variable not set
+2023-02-06T20:54:06.567376+00:00 DEBUG 'ansible_navigator.main' Default editor_command set to: vi +{line_number} {filename}
+2023-02-06T20:54:06.567395+00:00 DEBUG 'ansible_navigator.main' No config file set by ANSIBLE_NAVIGATOR_CONFIG
+2023-02-06T20:54:06.567413+00:00 DEBUG 'ansible_navigator.main' Looking in /home/dago
+2023-02-06T20:54:06.567432+00:00 DEBUG 'ansible_navigator.main' Looking for '/home/dago/.ansible-navigator.yml', '/home/dago/.ansible-navigator.yaml' and '/home/dago/.ansible-navigator.json'
+2023-02-06T20:54:06.567451+00:00 DEBUG 'ansible_navigator.main' Found 0: 
+2023-02-06T20:54:06.567469+00:00 DEBUG 'ansible_navigator.main' Looking in /home/dago/git/Bechtle/ansible-roles/rke2
+2023-02-06T20:54:06.567487+00:00 DEBUG 'ansible_navigator.main' Looking for '/home/dago/git/Bechtle/ansible-roles/rke2/ansible-navigator.yml', '/home/dago/git/Bechtle/ansible-roles/rke2/ansible-navigator.yaml' and '/home/dago/git/Bechtle/ansible-roles/rke2/ansible-navigator.json'
+2023-02-06T20:54:06.567507+00:00 DEBUG 'ansible_navigator.main' Found 0: 
+2023-02-06T20:54:06.567525+00:00 DEBUG 'ansible_navigator.main' All found 0: 
+2023-02-06T20:54:06.567544+00:00 DEBUG 'ansible_navigator.main' Using: None
+2023-02-06T20:54:06.567563+00:00 DEBUG 'ansible_navigator.main' No valid settings file found, using all default values for settings.
+2023-02-06T20:54:06.567581+00:00 DEBUG 'ansible_navigator.main' Command provided: 'help'
+2023-02-06T20:54:06.567602+00:00 WARNING 'ansible_navigator.main' Configuration errors encountered, rolling back to previous configuration.
+2023-02-06T20:54:06.567622+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: ansible_runner_artifact_dir = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.567641+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: ansible_runner_rotate_artifacts_count = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.567659+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: ansible_runner_timeout = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.567677+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: app = 'welcome' (str/Defaults)
+2023-02-06T20:54:06.567696+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: cmdline = '['help']' (list/Command line)
+2023-02-06T20:54:06.567715+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: collection_doc_cache_path = '/home/dago/.cache/ansible-navigator/collection_doc_cache.db' (str/Defaults)
+2023-02-06T20:54:06.567734+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: config = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.567752+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: container_engine = 'auto' (str/Defaults)
+2023-02-06T20:54:06.567771+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: container_options = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.567789+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: display_color = 'True' (bool/Defaults)
+2023-02-06T20:54:06.567807+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: editor_command = 'vi +{line_number} {filename}' (str/Defaults)
+2023-02-06T20:54:06.567826+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: editor_console = 'True' (bool/Defaults)
+2023-02-06T20:54:06.567844+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: exec_command = '/bin/bash' (str/Defaults)
+2023-02-06T20:54:06.567863+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: exec_shell = 'True' (bool/Defaults)
+2023-02-06T20:54:06.567881+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: execution_environment = 'True' (bool/Defaults)
+2023-02-06T20:54:06.567901+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: execution_environment_image = 'quay.io/ansible/creator-ee:v0.9.1' (str/Defaults)
+2023-02-06T20:54:06.567920+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: execution_environment_volume_mounts = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.567938+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: help_builder = 'False' (bool/Defaults)
+2023-02-06T20:54:06.567956+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: help_config = 'False' (bool/Defaults)
+2023-02-06T20:54:06.567974+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: help_doc = 'False' (bool/Defaults)
+2023-02-06T20:54:06.567992+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: help_inventory = 'False' (bool/Defaults)
+2023-02-06T20:54:06.568010+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: help_playbook = 'False' (bool/Defaults)
+2023-02-06T20:54:06.568028+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: images_details = '['everything']' (list/Defaults)
+2023-02-06T20:54:06.568046+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: inventory = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568064+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: inventory_column = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568082+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: lint_config = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568100+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: lintables = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568118+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: log_append = 'True' (bool/Defaults)
+2023-02-06T20:54:06.568136+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: log_file = '/home/dago/git/Bechtle/ansible-roles/rke2/ansible-navigator.log' (str/Defaults)
+2023-02-06T20:54:06.568155+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: log_level = 'warning' (str/Defaults)
+2023-02-06T20:54:06.568173+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: mode = 'interactive' (str/Defaults)
+2023-02-06T20:54:06.568191+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: osc4 = 'True' (bool/Defaults)
+2023-02-06T20:54:06.568209+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: pass_environment_variable = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568227+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: playbook = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568245+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: playbook_artifact_enable = 'True' (bool/Defaults)
+2023-02-06T20:54:06.568264+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: playbook_artifact_replay = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568282+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: playbook_artifact_save_as = '{playbook_dir}/{playbook_name}-artifact-{time_stamp}.json' (str/Defaults)
+2023-02-06T20:54:06.568300+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: plugin_name = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568319+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: plugin_type = 'module' (str/Defaults)
+2023-02-06T20:54:06.568337+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: pull_arguments = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568356+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: pull_policy = 'tag' (str/Defaults)
+2023-02-06T20:54:06.568374+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: set_environment_variable = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568392+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: settings_effective = 'False' (bool/Defaults)
+2023-02-06T20:54:06.568410+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: settings_sample = 'False' (bool/Defaults)
+2023-02-06T20:54:06.568429+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: settings_schema = 'json' (str/Defaults)
+2023-02-06T20:54:06.568446+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: settings_sources = 'False' (bool/Defaults)
+2023-02-06T20:54:06.568466+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: time_zone = 'UTC' (str/Defaults)
+2023-02-06T20:54:06.568485+00:00 DEBUG 'ansible_navigator.main' Prior to rollback: workdir = '/home/dago/git/Bechtle/ansible-roles/rke2' (str/Defaults)
+2023-02-06T20:54:06.568503+00:00 DEBUG 'ansible_navigator.main' After rollback: ansible_runner_artifact_dir = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568521+00:00 DEBUG 'ansible_navigator.main' After rollback: ansible_runner_rotate_artifacts_count = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568539+00:00 DEBUG 'ansible_navigator.main' After rollback: ansible_runner_timeout = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568557+00:00 DEBUG 'ansible_navigator.main' After rollback: app = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568576+00:00 DEBUG 'ansible_navigator.main' After rollback: cmdline = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568594+00:00 DEBUG 'ansible_navigator.main' After rollback: collection_doc_cache_path = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568612+00:00 DEBUG 'ansible_navigator.main' After rollback: config = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568630+00:00 DEBUG 'ansible_navigator.main' After rollback: container_engine = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568649+00:00 DEBUG 'ansible_navigator.main' After rollback: container_options = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568667+00:00 DEBUG 'ansible_navigator.main' After rollback: display_color = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568685+00:00 DEBUG 'ansible_navigator.main' After rollback: editor_command = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568702+00:00 DEBUG 'ansible_navigator.main' After rollback: editor_console = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568721+00:00 DEBUG 'ansible_navigator.main' After rollback: exec_command = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568739+00:00 DEBUG 'ansible_navigator.main' After rollback: exec_shell = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568757+00:00 DEBUG 'ansible_navigator.main' After rollback: execution_environment = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568775+00:00 DEBUG 'ansible_navigator.main' After rollback: execution_environment_image = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568793+00:00 DEBUG 'ansible_navigator.main' After rollback: execution_environment_volume_mounts = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568811+00:00 DEBUG 'ansible_navigator.main' After rollback: help_builder = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568829+00:00 DEBUG 'ansible_navigator.main' After rollback: help_config = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568847+00:00 DEBUG 'ansible_navigator.main' After rollback: help_doc = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568865+00:00 DEBUG 'ansible_navigator.main' After rollback: help_inventory = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568883+00:00 DEBUG 'ansible_navigator.main' After rollback: help_playbook = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568901+00:00 DEBUG 'ansible_navigator.main' After rollback: images_details = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568919+00:00 DEBUG 'ansible_navigator.main' After rollback: inventory = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568937+00:00 DEBUG 'ansible_navigator.main' After rollback: inventory_column = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568955+00:00 DEBUG 'ansible_navigator.main' After rollback: lint_config = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568973+00:00 DEBUG 'ansible_navigator.main' After rollback: lintables = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.568991+00:00 DEBUG 'ansible_navigator.main' After rollback: log_append = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569009+00:00 DEBUG 'ansible_navigator.main' After rollback: log_file = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569026+00:00 DEBUG 'ansible_navigator.main' After rollback: log_level = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569046+00:00 DEBUG 'ansible_navigator.main' After rollback: mode = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569064+00:00 DEBUG 'ansible_navigator.main' After rollback: osc4 = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569083+00:00 DEBUG 'ansible_navigator.main' After rollback: pass_environment_variable = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569101+00:00 DEBUG 'ansible_navigator.main' After rollback: playbook = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569118+00:00 DEBUG 'ansible_navigator.main' After rollback: playbook_artifact_enable = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569136+00:00 DEBUG 'ansible_navigator.main' After rollback: playbook_artifact_replay = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569154+00:00 DEBUG 'ansible_navigator.main' After rollback: playbook_artifact_save_as = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569172+00:00 DEBUG 'ansible_navigator.main' After rollback: plugin_name = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569190+00:00 DEBUG 'ansible_navigator.main' After rollback: plugin_type = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569208+00:00 DEBUG 'ansible_navigator.main' After rollback: pull_arguments = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569226+00:00 DEBUG 'ansible_navigator.main' After rollback: pull_policy = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569243+00:00 DEBUG 'ansible_navigator.main' After rollback: set_environment_variable = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569261+00:00 DEBUG 'ansible_navigator.main' After rollback: settings_effective = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569279+00:00 DEBUG 'ansible_navigator.main' After rollback: settings_sample = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569297+00:00 DEBUG 'ansible_navigator.main' After rollback: settings_schema = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569315+00:00 DEBUG 'ansible_navigator.main' After rollback: settings_sources = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569333+00:00 DEBUG 'ansible_navigator.main' After rollback: time_zone = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569351+00:00 DEBUG 'ansible_navigator.main' After rollback: workdir = 'Not set' (Constants/Not set)
+2023-02-06T20:54:06.569369+00:00 DEBUG 'ansible_navigator.main' Configuration rollback complete.
+2023-02-06T20:54:06.569387+00:00 DEBUG 'ansible_navigator.main' Collection doc cache not mounted
+2023-02-06T20:54:06.569413+00:00 WARNING 'ansible_navigator.main' Issues were found while applying the settings.
+2023-02-06T20:54:06.569435+00:00 INFO 'ansible_navigator.main' Command provided: 'help'
+2023-02-06T20:54:06.569459+00:00 ERROR 'ansible_navigator.main' argument {subcommand} --help: invalid choice: 'help' (choose from 'builder', 'collections', 'config', 'doc', 'exec', 'images', 'inventory', 'lint', 'replay', 'run', 'settings', 'welcome')
+2023-02-06T20:54:06.569481+00:00 INFO 'ansible_navigator.main' Configuration failed, using default log file location. (/home/dago/git/Bechtle/ansible-roles/rke2/ansible-navigator.log) Log level set to debug
+2023-02-06T20:54:06.569503+00:00 INFO 'ansible_navigator.main' Review the hints and log file to see what went wrong.

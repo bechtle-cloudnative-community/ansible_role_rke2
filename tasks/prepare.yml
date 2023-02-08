@@ -53,3 +53,12 @@
       - curl
       - wget
     state: present
+
+# Create Directory for Config
+- name: Create conifuguration Directory
+  ansible.builtin.file:
+    path: "{{ config_path }}"
+    mode: 0755
+    owner: root
+    group: root
+    state: directory

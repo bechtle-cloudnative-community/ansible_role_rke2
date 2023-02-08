@@ -20,29 +20,8 @@
   notify:
     - "Restart rke2"
 
-# Template Config file with the Values from default or passed by playbook and Inventorie
-- name: Template Config file
-  ansible.builtin.template:
-    src: "{{ template_config }}"
-    dest: "{{ config_file }}"
-    mode: 0644
-    owner: root
-    group: root
-  notify:
-    - "Restart rke2"
-
-- name: Verfiy RKE2 systemd service is started and enabled
+- name: Check if RKE2 is Started and enabled
   ansible.builtin.service:
     name: "rke2-{{ rke2_type }}"
     enabled: true
     state: started
-
-- name: Flush handlers
-  ansible.builtin.meta: flush_handlers
-
-- name: Replace 127.0.0.1 in kube.conf
-  ansible.builtin.replace:
-    path: /etc/rancher/rke2/rke2.yaml
-    regexp: "127.0.0.1"
-    replace: "{{ cluster_fqdn }}"
-  when: '"server" in rke2_type'

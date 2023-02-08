@@ -4,43 +4,69 @@
 - name: Solve Requirements throupth prepare.yml 
   ansible.builtin.include_tasks:
     file: prepare.yml
-#
+# Include rkeversion.yml for checking for new Version
 - name: Solve Requirements throupth prepare.yml 
   ansible.builtin.include_tasks:
     file: rkeversion.yml
 
-# Include of master.yml - this file doing the install of the server node of RKE2
-- name: Manage RKE2 Server node primary
+# Manage RKE2 on Primary Server node (Master)
+- name: Manage RKE2 Server primary
   when: '"server" in rke2_type and primary' 
   block:
-  # Include of master.yml - this file doing the install of the server node of RKE2
-  - name: Install RKE2 Server node
+  # Include of token.yml for Checking for token file
+  - name: Generate token - RKE2 Server
     ansible.builtin.include_tasks:
-      file: node.yml
-  - name: Manage RKE2
+      file: token.yml
+
+  # Include config yml to Template config.yml for rke2
+  - name: Template Config File - RKE2 Server
+    ansible.builtin.include_tasks:
+      file: config.yml
+
+  # Includes of rke2.yml for Update and Install RKE2
+  - name: Install/Update - RKE2 Server
     ansible.builtin.include_tasks:
       file: rke2.yml
 
-# Include of master.yml - this file doing the install of the server node of RKE2
-- name: Manage RKE2 Server node secondary
+  - name: Force running handlers
+    ansible.builtin.meta: flush_handlers
+
+
+# Manage RKE2 on Primary Server node (Secondary)
+- name: Manage RKE2 Server secondary
   when: '"server" in rke2_type and not primary'
   block:
-  # Include of master.yml - this file doing the install of the server node of RKE2
-  - name: Install RKE2 Server node
+  # Include of token.yml for Checking for token file
+  - name: Generate token - RKE2 Server
     ansible.builtin.include_tasks:
-      file: node.yml
-  - name: Manage RKE2
+      file: token.yml
+  # Include config yml to Template config.yml for rke2
+  - name: Template Config File - RKE2 Server
     ansible.builtin.include_tasks:
-      file: rke2.yml
+      file: config.yml
+  # Includes of rke2.yml for Update and Install RKE2
+  - name: Install/Update - RKE2 Server
+    ansible.builtin.include_tasks:
+      file: rke2
+  - name: Force running handlers
+    ansible.builtin.meta: flush_handlers
 
-# Include of master.yml - this file doing the install of the server node of RKE2
-- name: Manage RKE2 Agent node secondary
+
+# Manage RKE2 on Agent node (Worker)
+- name: Manage RKE2 Agent
   when: '"agent" in rke2_type'
   block:
-  # Include of master.yml - this file doing the install of the server node of RKE2
-  - name: Install RKE2 Server node
+  # Include of token.yml for Checking for token file
+  - name: Generate token - RKE2 Agent
     ansible.builtin.include_tasks:
-      file: node.yml
-  - name: Manage RKE2
+      file: token.yml
+  # Include config yml to Template config.yml for rke2
+  - name: Template Config File - RKE2 Agent
+    ansible.builtin.include_tasks:
+      file: config.yml
+    # Includes of rke2.yml for Update and Install RKE2
+  - name: Install/Update - RKE2 Agent
     ansible.builtin.include_tasks:
       file: rke2.yml
+  - name: Force running handlers
+    ansible.builtin.meta: flush_handlers

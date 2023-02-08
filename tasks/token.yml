@@ -2,13 +2,6 @@
 # Master.yml
 # Check Conf file exists
 # Create Directory for Config
-- name: Create config directory
-  ansible.builtin.file:
-    path: "{{ config_path }}"
-    state: directory
-    mode: 0755
-    owner: root
-    group: root
 
 # RKE2 Check Token file exists
 - name: Check RKE2 Token File
@@ -33,14 +26,19 @@
 - name: Set token to facts    
   ansible.builtin.set_fact:
     token: "{{ item.content | b64decode }}" 
-    rke2_server_active: true 
-  when: item.content is defined
+  when: item.content is defined 
   loop: "{{ token_b64.results }}"
 
-- name: RKE2 Initial Token Setup by unexistent
+# Read Token value to facts
+- name: Set token to facts    
   ansible.builtin.set_fact:
-    token: "{{ lookup('community.general.random_string', special=false, length=33) }}"
-    rke2_server_active: false 
-  when: 
-    - token is undefined
-    - primary
+    token: "{{ token | split(':') | last }}" 
+  when: primary and token is defined
+  loop: "{{ token_b64.results }}"
+
+  # Read Token value to facts
+- name: Set token to facts    
+  ansible.builtin.set_fact:
+    token: "{{ lookup('community.general.random_string', special=false, length=32) }}" 
+  when: primary and token is undefined
+  loop: "{{ token_b64.results }}"
