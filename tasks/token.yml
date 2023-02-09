@@ -23,14 +23,14 @@
     loop_var: token_node
 
 # Read Token value to facts
-- name: Set token to facts    
+- name: Set token to facts for all  
   ansible.builtin.set_fact:
     token: "{{ item.content | b64decode }}" 
   when: item.content is defined 
   loop: "{{ token_b64.results }}"
 
 # Read Token value to facts
-- name: Set token to facts    
+- name: Set token to facts for primary
   ansible.builtin.set_fact:
     token: "{{ token | split(':') | last }}" 
   when: primary and token is defined
@@ -39,6 +39,6 @@
   # Read Token value to facts
 - name: Set token to facts    
   ansible.builtin.set_fact:
-    token: "{{ lookup('community.general.random_string', special=false, length=32) }}" 
+    token: "{{ lookup('community.general.random_string', special=false, length=32) }}\n" 
   when: primary and token is undefined
   loop: "{{ token_b64.results }}"

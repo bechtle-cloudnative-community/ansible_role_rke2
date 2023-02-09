@@ -33,7 +33,7 @@ bind_address: 0.0.0.0
 # This endpoint can be set up using any number approaches, such as:
 # The folowing option to provide LB:
 #  - A layer 4 (TCP) load balancer
-#  - Round-robin DNS
+#  - Round-robin DNS1
 #  - Virtual or elastic IP addresses
 cluster_fqdn: ansible-rke2-server-1
 # Subject alternative names for the Server and Cluster API to accept

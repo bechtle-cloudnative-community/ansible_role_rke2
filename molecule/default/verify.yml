@@ -29,6 +29,7 @@
     args:
       executable: /bin/bash
     changed_when: false
+  
     register: node_status
     loop: "{{ groups['all'] }}"
 
@@ -37,6 +38,6 @@
       that:
         - '"ready status" in item.stdout'
       success_msg: "{{ item.item }}: {{ item.stdout }}"
-      fail_msg: "{{ item.item }} not Ready"
+      fail_msg: "{{ item.item }}: {{ item.stdout }}"
     loop: "{{ node_status.results }}"
   

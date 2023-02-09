@@ -31,23 +31,27 @@
   - name: Force running handlers
     ansible.builtin.meta: flush_handlers
 
-
 # Manage RKE2 on Primary Server node (Secondary)
 - name: Manage RKE2 Server secondary
   when: '"server" in rke2_type and not primary'
+
   block:
+
   # Include of token.yml for Checking for token file
   - name: Generate token - RKE2 Server
     ansible.builtin.include_tasks:
       file: token.yml
+
   # Include config yml to Template config.yml for rke2
   - name: Template Config File - RKE2 Server
     ansible.builtin.include_tasks:
       file: config.yml
+
   # Includes of rke2.yml for Update and Install RKE2
   - name: Install/Update - RKE2 Server
     ansible.builtin.include_tasks:
       file: rke2
+
   - name: Force running handlers
     ansible.builtin.meta: flush_handlers
 
@@ -55,18 +59,40 @@
 # Manage RKE2 on Agent node (Worker)
 - name: Manage RKE2 Agent
   when: '"agent" in rke2_type'
+
   block:
+
   # Include of token.yml for Checking for token file
   - name: Generate token - RKE2 Agent
     ansible.builtin.include_tasks:
       file: token.yml
+
   # Include config yml to Template config.yml for rke2
   - name: Template Config File - RKE2 Agent
     ansible.builtin.include_tasks:
       file: config.yml
+
     # Includes of rke2.yml for Update and Install RKE2
   - name: Install/Update - RKE2 Agent
     ansible.builtin.include_tasks:
       file: rke2.yml
+
   - name: Force running handlers
     ansible.builtin.meta: flush_handlers
+
+- name: Wait til nodes in cluster are ready
+  vars: 
+    jsonpath: '{@.status.conditions[?(@.type==''"''Ready''"'')].message}'
+    kubectl: /var/lib/rancher/rke2/bin/kubectl
+    kubectle_config: /etc/rancher/rke2/rke2.yaml
+  ansible.builtin.shell: |
+    {{ kubectl }} get node {{ item }} -o jsonpath='{{ jsonpath }}' --kubeconfig {{ kubectle_config }}
+  args:
+    executable: /bin/bash
+  changed_when: false
+  when: rke2_type == 'server'
+  until: '"ready status" in node_status.stdout'
+  retries: 30
+  delay: 3
+  register: node_status
+  loop: "{{ groups['all'] }}"      
