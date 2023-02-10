@@ -1,8 +1,9 @@
 ansible_role_rke2
 =========
 
-This Role is itended to Install and update RKE2. 
-Tested with molcule on: 
+This Role is itended to install and update RKE2.
+
+Tested on: 
  - Debian 11
 
 Requirements
@@ -23,16 +24,21 @@ Inventory example:
 
 ```INI
 [server]
-master-node1 rke2_type="server"
-
+master-node1 rke2_type="server" primary=true
 [agent]
 agent-node1 rke2_type="agent"
 ```
+playbook example:
 
+
+```yaml
+---
 - hosts: all
+  vars:
+    fqdn: "{{ inventory_name }}.example.com"
   roles:
     - { role: bechtle.rke2 }
-
+```
 License
 -------
 
