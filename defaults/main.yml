@@ -36,6 +36,7 @@ bind_address: 0.0.0.0
 #  - Round-robin DNS1
 #  - Virtual or elastic IP addresses
 cluster_fqdn: ansible-rke2-server-1
+
 # Subject alternative names for the Server and Cluster API to accept
 # FQDN or IPv4 of the Server Nodes
 tls_san:

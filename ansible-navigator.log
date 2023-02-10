@@ -383,3 +383,4 @@
 2023-02-06T20:54:06.569459+00:00 ERROR 'ansible_navigator.main' argument {subcommand} --help: invalid choice: 'help' (choose from 'builder', 'collections', 'config', 'doc', 'exec', 'images', 'inventory', 'lint', 'replay', 'run', 'settings', 'welcome')
 2023-02-06T20:54:06.569481+00:00 INFO 'ansible_navigator.main' Configuration failed, using default log file location. (/home/dago/git/Bechtle/ansible-roles/rke2/ansible-navigator.log) Log level set to debug
 2023-02-06T20:54:06.569503+00:00 INFO 'ansible_navigator.main' Review the hints and log file to see what went wrong.
+
