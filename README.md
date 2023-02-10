@@ -1,39 +1,45 @@
 ansible_role_rke2
 =========
 
-This Role is itended to Install and update RKE2. This role is tested on:
+This Role is itended to Install and update RKE2. 
+Tested with molcule on: 
  - Debian 11
 
 Requirements
 ------------
 
-You need at least 2 Nodes. One for the Control plane and as Primary Master and one as Agent. As this is tested with the role.
+You need at least 2 Nodes. One for the Control plane and as Primary Master and one as Agent(worker), as this is tested with the role.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Please refer to defaults/main.yml
 
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Inventory example:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```INI
+[server]
+master-node1 rke2_type="server"
+
+[agent]
+agent-node1 rke2_type="agent"
+```
+
+- hosts: all
+  roles:
+    - { role: bechtle.rke2 }
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+This role is created by Thomas Geiger @ Bechtle Schweiz AG.
+
