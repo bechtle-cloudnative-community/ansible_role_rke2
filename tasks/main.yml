@@ -50,7 +50,7 @@
   # Includes of rke2.yml for Update and Install RKE2
   - name: Install/Update - RKE2 Server
     ansible.builtin.include_tasks:
-      file: rke2
+      file: rke2.yml
 
   - name: Force running handlers
     ansible.builtin.meta: flush_handlers
