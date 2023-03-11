@@ -95,4 +95,4 @@
   retries: 30
   delay: 3
   register: node_status
-  loop: "{{ groups['all'] }}"      
+  loop: "{{ play_hosts }}"      
