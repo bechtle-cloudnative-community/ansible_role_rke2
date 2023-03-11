@@ -86,7 +86,7 @@
     kubectl: /var/lib/rancher/rke2/bin/kubectl
     kubectle_config: /etc/rancher/rke2/rke2.yaml
   ansible.builtin.shell: |
-    {{ kubectl }} get node {{ item.split(".")[0] }} -o jsonpath='{{ jsonpath }}' --kubeconfig {{ kubectle_config }}
+    {{ kubectl }} get node {{ item.split(".")[0] }} -o jsonpath='{{ jsonpath }}' --kubeconfig {{ kubectle_config }} 
   args:
     executable: /bin/bash
   changed_when: false
@@ -96,4 +96,3 @@
   delay: 3
   register: node_status
   loop: "{{ play_hosts }}"
-  run_once: true      
