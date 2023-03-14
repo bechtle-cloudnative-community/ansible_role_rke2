@@ -21,6 +21,7 @@
     - "Restart rke2"
 
 - name: Check if RKE2 is Started and enabled
+  throttle: 1
   ansible.builtin.service:
     name: "rke2-{{ rke2_type }}"
     enabled: true

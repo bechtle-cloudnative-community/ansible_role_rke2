@@ -12,7 +12,6 @@
 
 # Manage RKE2 on Primary Server node (Master)
 - name: Manage RKE2 Server primary
-  throttle: 1
   when: '"server" in rke2_type and primary' 
   block:
   # Include of token.yml for Checking for token file
@@ -35,7 +34,6 @@
 
 # Manage RKE2 on Primary Server node (Secondary)
 - name: Manage RKE2 Server secondary
-  throttle: 1
   when: '"server" in rke2_type and not primary'
 
   block:
@@ -56,6 +54,7 @@
       file: rke2.yml
 
   - name: Force running handlers
+    throttle: 1
     ansible.builtin.meta: flush_handlers
 
 
