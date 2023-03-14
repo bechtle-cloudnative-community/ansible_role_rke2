@@ -44,7 +44,7 @@ tls_san:
   
 # Cluster IP Address Range for the Pods and Services. Set to RKE2 defaulte
 cluster_cidr: 10.42.0.0/16
-service_cidr: "{{ cluster_cidr }}"
+service_cidr: 10.43.0.0/16
 
 # Path Config file
 template_config: config.yaml.j2

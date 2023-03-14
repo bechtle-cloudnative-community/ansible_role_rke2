@@ -66,10 +66,3 @@
     owner: root 
     group: root
     state: directory
-  
-# Because of localhost IPv6 issue remove localhost
-- name: Ensure ::1 localhost entry in hosts is absent
-  ansible.builtin.lineinfile:
-    path: /etc/hosts
-    regexp: '^::1'
-    state: absent
