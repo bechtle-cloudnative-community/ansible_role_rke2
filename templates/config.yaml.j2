@@ -8,7 +8,7 @@ token: {{ token }}
 # server Configuration Part
 tls-san: {{ tls_san }}
 cluster-cidr: "{{ cluster_cidr}}"
-service-cidr: "{{ cluster_cidr}}"
+service-cidr: "{{ service_cidr}}"
 cni: {{ cni }}
 {% if bind_address | ansible.utils.ipaddr('host')  and bind_address != '0.0.0.0' %}
 bind-address: {{ bind_address }}
