@@ -47,7 +47,10 @@ cluster_cidr: 10.42.0.0/16
 service_cidr: 10.43.0.0/16
 
 cni:
-  - calico
+  - canal
+
+disable_service:
+  - rke2-ingress-nginx
 
 # Path Config file
 template_config: config.yaml.j2
