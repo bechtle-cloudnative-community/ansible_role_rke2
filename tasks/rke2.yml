@@ -10,18 +10,18 @@
 
 # Install Script for Server
 - name: Execute install Script
-  ansible.builtin.command:
-    cmd: "{{ install_sh }}"
   register: install_sh_out
   environment:
     INSTALL_RKE2_TYPE: "{{ rke2_type }}"
     INSTALL_RKE2_CHANNEL: "{{ channel }}"
   when: update
+  changed_when: update
   notify:
     - "Restart rke2"
+  ansible.builtin.command:
+    cmd: "{{ install_sh }}"
 
 - name: Check if RKE2 is Started and enabled
-  throttle: 1
   ansible.builtin.service:
     name: "rke2-{{ rke2_type }}"
     enabled: true

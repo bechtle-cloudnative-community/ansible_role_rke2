@@ -55,7 +55,6 @@
       - iptables
       - curl
       - wget
-      - wireguard
     state: present
 
 # Create Directory for Config

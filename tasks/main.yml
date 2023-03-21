@@ -35,7 +35,7 @@
 # Manage RKE2 on Primary Server node (Secondary)
 - name: Manage RKE2 Server secondary
   when: '"server" in rke2_type and not primary'
-
+  throttle: 1
   block:
 
   # Include of token.yml for Checking for token file
@@ -54,14 +54,13 @@
       file: rke2.yml
 
   - name: Force running handlers
-    throttle: 1
     ansible.builtin.meta: flush_handlers
 
 
 # Manage RKE2 on Agent node (Worker)
 - name: Manage RKE2 Agent
   when: '"agent" in rke2_type'
-
+  throttle: 1
   block:
 
   # Include of token.yml for Checking for token file
@@ -83,6 +82,7 @@
     ansible.builtin.meta: flush_handlers
 
 - name: Wait til nodes in cluster are ready
+  throttle: 1
   vars: 
     jsonpath: '{@.status.conditions[?(@.type==''"''Ready''"'')].message}'
     kubectl: /var/lib/rancher/rke2/bin/kubectl
@@ -98,3 +98,7 @@
   delay: 3
   register: node_status
   loop: "{{ play_hosts }}"
+
+    
+
+  
