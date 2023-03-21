@@ -13,7 +13,7 @@
       - 200
   register: rke2_version_list
 
-- name: Get installed version from node 
+- name: Get installed version from node
   ansible.builtin.shell:
     cmd: rke2 --version | cut -d ' ' -f 3 | head -n1 || echo "not installed"
   changed_when: '"not installed" in rke2_installed_version.stdout '
@@ -31,10 +31,10 @@
     rke2_latest_version: "{{ rke2_installed_version | list }}"
   when: rke2_version_list.status == 503
 
-- name: Change update Status  
+- name: Change update Status
   ansible.builtin.set_fact:
     update: true
   when:
-    - check_update  
-    - 'rke2_installed_version.changed or rke2_latest_version[0] != rke2_installed_version.stdout' 
+    - check_update
+    - 'rke2_installed_version.changed or rke2_latest_version[0] != rke2_installed_version.stdout'
     - rke2_version_list.status != 503

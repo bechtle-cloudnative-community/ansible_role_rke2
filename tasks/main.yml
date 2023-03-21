@@ -1,36 +1,36 @@
 ---
 # tasks file for rke2
 # Include of prpare.yml This file is intendend to handle the Requirements for RKE2
-- name: Solve Requirements throupth prepare.yml 
+- name: Solve Requirements throupth prepare.yml
   ansible.builtin.include_tasks:
     file: prepare.yml
-    
+
 # Include rkeversion.yml for checking for new Version
-- name: Solve Requirements throupth prepare.yml 
+- name: Solve Requirements throupth prepare.yml
   ansible.builtin.include_tasks:
     file: rkeversion.yml
 
 # Manage RKE2 on Primary Server node (Master)
 - name: Manage RKE2 Server primary
-  when: '"server" in rke2_type and primary' 
+  when: '"server" in rke2_type and primary'
   block:
-  # Include of token.yml for Checking for token file
-  - name: Generate token - RKE2 Server
-    ansible.builtin.include_tasks:
-      file: token.yml
+    # Include of token.yml for Checking for token file
+    - name: Generate token - RKE2 Server
+      ansible.builtin.include_tasks:
+        file: token.yml
 
-  # Include config yml to Template config.yml for rke2
-  - name: Template Config File - RKE2 Server
-    ansible.builtin.include_tasks:
-      file: config.yml
+    # Include config yml to Template config.yml for rke2
+    - name: Template Config File - RKE2 Server
+      ansible.builtin.include_tasks:
+        file: config.yml
 
-  # Includes of rke2.yml for Update and Install RKE2
-  - name: Install/Update - RKE2 Server
-    ansible.builtin.include_tasks:
-      file: rke2.yml
+    # Includes of rke2.yml for Update and Install RKE2
+    - name: Install/Update - RKE2 Server
+      ansible.builtin.include_tasks:
+        file: rke2.yml
 
-  - name: Force running handlers
-    ansible.builtin.meta: flush_handlers
+    - name: Force running handlers
+      ansible.builtin.meta: flush_handlers
 
 # Manage RKE2 on Primary Server node (Secondary)
 - name: Manage RKE2 Server secondary
@@ -38,23 +38,23 @@
   throttle: 1
   block:
 
-  # Include of token.yml for Checking for token file
-  - name: Generate token - RKE2 Server
-    ansible.builtin.include_tasks:
-      file: token.yml
+    # Include of token.yml for Checking for token file
+    - name: Generate token - RKE2 Server
+      ansible.builtin.include_tasks:
+        file: token.yml
 
-  # Include config yml to Template config.yml for rke2
-  - name: Template Config File - RKE2 Server
-    ansible.builtin.include_tasks:
-      file: config.yml
+    # Include config yml to Template config.yml for rke2
+    - name: Template Config File - RKE2 Server
+      ansible.builtin.include_tasks:
+        file: config.yml
 
-  # Includes of rke2.yml for Update and Install RKE2
-  - name: Install/Update - RKE2 Server
-    ansible.builtin.include_tasks:
-      file: rke2.yml
+    # Includes of rke2.yml for Update and Install RKE2
+    - name: Install/Update - RKE2 Server
+      ansible.builtin.include_tasks:
+        file: rke2.yml
 
-  - name: Force running handlers
-    ansible.builtin.meta: flush_handlers
+    - name: Force running handlers
+      ansible.builtin.meta: flush_handlers
 
 
 # Manage RKE2 on Agent node (Worker)
@@ -63,32 +63,32 @@
   throttle: 1
   block:
 
-  # Include of token.yml for Checking for token file
-  - name: Generate token - RKE2 Agent
-    ansible.builtin.include_tasks:
-      file: token.yml
+    # Include of token.yml
+    - name: Generate token - RKE2 Agent
+      ansible.builtin.include_tasks:
+        file: token.yml
 
-  # Include config yml to Template config.yml for rke2
-  - name: Template Config File - RKE2 Agent
-    ansible.builtin.include_tasks:
-      file: config.yml
+    # Include config yml to Template config.yml for rke2
+    - name: Template Config File - RKE2 Agent
+      ansible.builtin.include_tasks:
+        file: config.yml
 
-    # Includes of rke2.yml for Update and Install RKE2
-  - name: Install/Update - RKE2 Agent
-    ansible.builtin.include_tasks:
-      file: rke2.yml
+      # Includes of rke2.yml for Update and Install RKE2
+    - name: Install/Update - RKE2 Agent
+      ansible.builtin.include_tasks:
+        file: rke2.yml
 
-  - name: Force running handlers
-    ansible.builtin.meta: flush_handlers
+    - name: Force running handlers
+      ansible.builtin.meta: flush_handlers
 
 - name: Wait til nodes in cluster are ready
   throttle: 1
-  vars: 
+  vars:
     jsonpath: '{@.status.conditions[?(@.type==''"''Ready''"'')].message}'
     kubectl: /var/lib/rancher/rke2/bin/kubectl
     kubectle_config: /etc/rancher/rke2/rke2.yaml
   ansible.builtin.shell: |
-    {{ kubectl }} get node {{ item.split(".")[0] }} -o jsonpath='{{ jsonpath }}' --kubeconfig {{ kubectle_config }} 
+    {{ kubectl }} get node {{ item.split(".")[0] }} -o jsonpath='{{ jsonpath }}' --kubeconfig {{ kubectle_config }}
   args:
     executable: /bin/bash
   changed_when: false
@@ -98,7 +98,3 @@
   delay: 3
   register: node_status
   loop: "{{ play_hosts }}"
-
-    
-
-  

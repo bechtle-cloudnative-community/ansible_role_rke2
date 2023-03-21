@@ -3,7 +3,7 @@
   ansible.builtin.template:
     src: config.yaml.j2
     dest: "{{ config_file }}"
-    mode: 0644
+    mode: "0644"
     owner: root
     group: root
   notify:

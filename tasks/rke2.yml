@@ -3,7 +3,7 @@
   ansible.builtin.get_url:
     url: "{{ channel_url }}"
     dest: "{{ install_sh }}"
-    mode: 0755
+    mode: "0755"
     owner: root
     group: root
   when: update

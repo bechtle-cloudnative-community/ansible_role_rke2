@@ -1,28 +1,27 @@
 ---
-  - name: Ensure namespace exists
-    run_once: true
-    kubernetes.core.k8s:
-      kubeconfig: "{{ kube_config }}"
-      name: "{{ namespace }}"
-      api_version: v1
-      kind: Namespace
-      state: present
-  
-  - name: Ensure Helm repo is added {{ repo_name }}
-    when: repo_url is defined and repo_name is defined
-    kubernetes.core.helm_repository:
-      kubeconfig: "{{ kube_config }}"
-      repo_name: "{{ repo_name }}"
-      repo_url: "{{ repo_url }}"
-  
-  - name: Ensure helm chart is added {{ deployment_name }}
-    run_once: true
-    kubernetes.core.helm:
-      kubeconfig: "{{ kube_config }}"
-      release_namespace: "{{ namespace }}"
-      release_name: "{{ deployment_name }}"
-      chart_ref: "{{ chart_ref }}"
-      release_values: "{{ chart_value }}"
-      release_state: present
-      update_repo_cache: true
-  
+- name: Ensure namespace exists
+  run_once: true
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kube_config }}"
+    name: "{{ namespace }}"
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: Ensure Helm repo is added {{ repo_name }}
+  when: repo_url is defined and repo_name is defined
+  kubernetes.core.helm_repository:
+    kubeconfig: "{{ kube_config }}"
+    repo_name: "{{ repo_name }}"
+    repo_url: "{{ repo_url }}"
+
+- name: Ensure helm chart is added {{ deployment_name }}
+  run_once: true
+  kubernetes.core.helm:
+    kubeconfig: "{{ kube_config }}"
+    release_namespace: "{{ namespace }}"
+    release_name: "{{ deployment_name }}"
+    chart_ref: "{{ chart_ref }}"
+    release_values: "{{ chart_value }}"
+    release_state: present
+    update_repo_cache: true

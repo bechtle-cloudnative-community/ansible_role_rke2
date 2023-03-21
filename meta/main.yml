@@ -10,7 +10,7 @@ galaxy_info:
 
   license: MIT
 
-  min_ansible_version: 2.1
+  min_ansible_version: '2.1'
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:
@@ -22,9 +22,7 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-  - name: Debian
-    versions:
-    - 11
+    - name: Debian
   
   galaxy_tags:
     - rke2
