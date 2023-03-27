@@ -6,6 +6,5 @@
         policy: always
       environment-variables:
         pass:
-          - KUBECONFIG
           - PATH
  

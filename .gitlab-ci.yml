@@ -14,7 +14,7 @@
       - virtenv/
   
   before_script:
-    - apt-get -y update && apt-get -y upgrade %% apt-get -y install ansible
+    - apt-get -y update && apt-get -y upgrade && apt-get -y install ansible
     - python -V
     - pip install virtualenv
     - virtualenv virtenv
