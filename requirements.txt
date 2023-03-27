@@ -1,0 +1,16 @@
+ansible-compat==3.0.1
+ansible-core==2.14.1
+ansible-lint==6.12.2
+ansible-runner==2.3.1
+Jinja2==3.1.2
+jsonschema==4.17.3
+kubernetes==26.1.0
+lxml==4.9.2
+molecule==4.0.4
+molecule-kubevirt==0.1.0
+molecule-podman==2.0.3
+molecule-docker
+openshift==0.13.1
+pyvim==3.0.3
+pyvmomi==7.0.3
+PyYAML==6.0
