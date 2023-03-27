@@ -2,42 +2,32 @@
 dependency:
   name: galaxy
 driver:
-  name: vagrant
-  provider:
-    name: libvirt
-    cachier: machine
-    parallel: true
-    default_box: 'generic/dabian11'
+  name: kubevirt
 platforms:
   - name: ansible-rke2-server-1
-    hostname: ansible-rke2-server-1.example.com
-    box: 'generic/debian11'
-    interfaces:
-      - network_name: private_network
-        ip: 192.168.10.10
-    memory: 4096
-    cpus: 2
-    groups:
-      - server
+    # namespace: devops
+    volumes:
+      - name: boot
+        containerDisk:
+          image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
+          path: /disk/debian-11.qcow2
+    ssh_service:
+      type: ClusterIP
   - name: ansible-rke2-agent-1
-    hostname: ansible-rke2-agent-1.example.com
-    box: 'generic/debian11'
-    interfaces:
-      - network_name: private_network
-        ip: 192.168.10.10
-    memory: 4096
-    cpus: 2
-    groups:
-      - agent
+    # namespace: devops
+    volumes:
+      - name: boot
+        containerDisk:
+          image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
+          path: /disk/debian-11.qcow2
+    ssh_service:
+      type: ClusterIP
 provisioner:
   name: ansible
-  connection_options:
-    ansible_ssh_user: vagrant
-    ansible_become: true
   log: true
   inventory:
     host_vars:
-      ansible-rke2-server-1:        
+      ansible-rke2-server-1:
         rke2_type: server
         primary: true
         fqdn: "{{ inventory_name }}.example.com"

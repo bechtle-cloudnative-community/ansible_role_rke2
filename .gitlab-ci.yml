@@ -1,0 +1,11 @@
+---
+  image: registry.gitlab-bs.demolab.ch:4567/ansible-ee/ansible_ee_vmware:latest
+  
+  before_script:
+    - ansible --version
+    - molecule --version
+  
+  molecule:
+    stage: test
+    script:
+      - molecule test
