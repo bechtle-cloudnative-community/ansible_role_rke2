@@ -1,6 +1,6 @@
 ---
   default:
-    image: python:3.10
+    image: python:latest
   stages:
     - test
   
@@ -14,6 +14,7 @@
       - virtenv/
   
   before_script:
+    - apt-get -y update && apt-get -y upgrade %% apt-get -y install ansible
     - python -V
     - pip install virtualenv
     - virtualenv virtenv
@@ -21,7 +22,7 @@
     - pip install -r requirements.txt
     - ansible --version
     - molecule --version
-      
+
   molecule:
     stage: test
     script:
