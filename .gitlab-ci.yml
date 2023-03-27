@@ -1,6 +1,14 @@
 default:
-  image: registry.gitlab-bs.demolab.ch:4567/ansible-ee/ansible_ee_vmware
+  image: python:3.11
 
-molecule:
-  script: ls -l && molecule --version && cat molecule/default/molecule.yml
+before_script:
+  - pip install --upgrade pip
+  - pip install ansible ansible-lint molecule[kubevirt]
 
+stages:
+  - test
+
+molecule_test:
+  stage: test
+  script:
+    - molecule test

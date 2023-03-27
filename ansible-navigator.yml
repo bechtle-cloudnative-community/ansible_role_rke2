@@ -1,0 +1,10 @@
+---
+  ansible-navigator:
+    execution-environment:
+      image: registry.gitlab-bs.demolab.ch:4567/ansible-ee/ansible_ee_vmware:latest
+      pull:
+        policy: never
+      environment-variables:
+        pass:
+          - KUBECONFIG
+ 
