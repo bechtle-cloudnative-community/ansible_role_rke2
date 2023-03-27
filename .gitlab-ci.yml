@@ -21,8 +21,7 @@
     - pip install -r requirements.txt
     - ansible --version
     - molecule --version
-    - docker --version
-  
+      
   molecule:
     stage: test
     script:
