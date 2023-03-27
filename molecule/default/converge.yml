@@ -6,7 +6,7 @@
       ansible.builtin.copy:
         content: "nameserver 192.168.121.1"
         dest: /etc/resolv.conf
-        mode: 0644
+        mode: "0644"
         owner: root
         group: root
 
