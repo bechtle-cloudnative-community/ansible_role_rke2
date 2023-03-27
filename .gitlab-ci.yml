@@ -23,8 +23,6 @@
   
   molecule:
     stage: test
-    tags:
-      - molecule-jobs
     script:
       - molecule test
   
