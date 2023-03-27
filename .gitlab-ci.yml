@@ -1,7 +1,6 @@
-default:
-  image: python:3.10
-
 before_script:
+  - apt -y update && apt -y upgrade
+  - apt install python3 pyhton3-dev python3-cryptography curl build-base autoconf automake gcc git python3-pip build-base linux-headers musl-dev libffi-dev openssl-dev openssh kubectl
   - pip install --upgrade pip
   - pip install -r requirements.txt 
 
