@@ -6,6 +6,7 @@
     - molecule --version
   
   molecule:
+    image: registry.gitlab-bs.demolab.ch:4567/ansible-ee/ansible_ee_vmware:latest
     stage: test
     script:
       - molecule test
