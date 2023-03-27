@@ -1,13 +1,6 @@
-image: python:3.9
+default:
+  image: registry.gitlab-bs.demolab.ch:4567/ansible-ee/ansible_ee_vmware
 
-before_script:
-  - pip install --upgrade pip
-  - pip install ansible ansible-lint molecule[kubevirt] kubernetes
+molecule:
+  script: molecule test
 
-stages:
-  - test
-
-molecule_test:
-  stage: test
-  script:
-    - molecule test
