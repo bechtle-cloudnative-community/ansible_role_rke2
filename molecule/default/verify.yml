@@ -1,10 +1,42 @@
 ---
 # This is an example playbook to execute Ansible tests.
-
 - name: Verify
-  hosts: all
-  gather_facts: false
+  hosts: server
+  become: true
+  gather_facts: true
+  strategy: linear
+  vars:
+    kubectl: /var/lib/rancher/rke2/bin/kubectl
+    kubectle_config: /etc/rancher/rke2/rke2.yaml
   tasks:
-  - name: Example assertion
-    ansible.builtin.assert:
-      that: true
+    - name: Check if Kubectl is available on Control node
+      ansible.builtin.stat:
+        name: "{{ kubectl }}"
+      register: cmd_kubectl
+
+    - name: Run Kubectl check local
+      ansible.builtin.assert:
+        that:
+          - cmd_kubectl.stat.exists
+        success_msg: "kubectl exists"
+        fail_msg: "kubectl does not exists"
+
+    - name: Get Node status kubectl
+      vars:
+        jsonpath: '{@.status.conditions[?(@.type==''"''Ready''"'')].message}'
+      ansible.builtin.shell: |
+        {{ kubectl }} get node {{ item }} -o jsonpath='{{ jsonpath }}' --kubeconfig {{ kubectle_config }}
+      args:
+        executable: /bin/bash
+      changed_when: false
+
+      register: node_status
+      loop: "{{ groups['all'] }}"
+
+    - name: Check Node Status
+      ansible.builtin.assert:
+        that:
+          - '"ready status" in item.stdout'
+        success_msg: "{{ item.item }}: {{ item.stdout }}"
+        fail_msg: "{{ item.item }}: {{ item.stdout }}"
+      loop: "{{ node_status.results }}"
