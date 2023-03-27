@@ -1,27 +1,12 @@
 ---
   default:
-    image: python:latest
+    image: registry.gitlab-bs.demolab.ch:4567/ansible-ee/ansible_ee_vmware:latest
   stages:
     - test
   
   variables:
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip"
     GIT_STRATEGY: clone
-  
-  cache:
-    paths:
-      - .pip/
-      - virtenv/
-  
-  before_script:
-    - apt-get -y update && apt-get -y upgrade && apt-get -y install ansible
-    - python -V
-    - pip install virtualenv
-    - virtualenv virtenv
-    - source virtenv/bin/activate
-    - pip install -r requirements.txt
-    - ansible --version
-    - molecule --version
 
   molecule:
     stage: test
