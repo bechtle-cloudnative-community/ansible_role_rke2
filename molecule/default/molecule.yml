@@ -27,10 +27,6 @@ platforms:
 provisioner:
   name: ansible
   log: true
-  ansible_user: debian
-  become: true
-  options:
-    vvv: true
   inventory:
     host_vars:
       ansible-rke2-server-1:
