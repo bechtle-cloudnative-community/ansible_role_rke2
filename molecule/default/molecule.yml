@@ -6,6 +6,7 @@ driver:
 platforms:
   - name: ansible-rke2-server-1
     namespace: devops
+    molecule_user: molecule
     volumes:
       - name: boot
         containerDisk:
@@ -25,6 +26,9 @@ platforms:
       type: ClusterIP
 provisioner:
   name: ansible
+  log: true
+  options:
+    vvv: true
   inventory:
     host_vars:
       ansible-rke2-server-1:
