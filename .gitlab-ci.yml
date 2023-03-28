@@ -11,6 +11,6 @@
   molecule:
     stage: test
     script:
-      - molecule Converge && sleep 10000000
+      - molecule converge && sleep 10000000
   
   
