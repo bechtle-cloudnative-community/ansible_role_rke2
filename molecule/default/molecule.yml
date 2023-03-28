@@ -6,6 +6,7 @@ driver:
 platforms:
   - name: ansible-rke2-server-1
     namespace: devops
+    molecule_user: debian
     volumes:
       - name: boot
         containerDisk:
@@ -13,25 +14,20 @@ platforms:
           path: /disk/debian-11.qcow2
     ssh_service:
       type: ClusterIP
-    user_data:
-      ssh_authorized_keys:
-        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDaVSL53xTxv7MuNlPdqFC0sTFwM1YM2ZuKA+Yt5sFCWZtqDPt216Ppv+PDxZTUyWPvQLVLsXuJ0on95tx3nC1FNpEXdbemlKVr9/++BKYvfCaA7KMx2CiMLqvJMS2SiP3hGt4/w69GBlDQ/Dux1NuSlypqb8mzWXM+/bfribgdJw==
   - name: ansible-rke2-agent-1
     namespace: devops
+    molecule_user: debian
     volumes:
       - name: boot
         containerDisk:
           image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
           path: /disk/debian-11.qcow2
-    user_data:
-      ssh_authorized_keys:
-        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDaVSL53xTxv7MuNlPdqFC0sTFwM1YM2ZuKA+Yt5sFCWZtqDPt216Ppv+PDxZTUyWPvQLVLsXuJ0on95tx3nC1FNpEXdbemlKVr9/++BKYvfCaA7KMx2CiMLqvJMS2SiP3hGt4/w69GBlDQ/Dux1NuSlypqb8mzWXM+/bfribgdJw==
     ssh_service:
       type: ClusterIP
 provisioner:
   name: ansible
   log: true
-  ansible_user: molecule
+  ansible_user: debian
   become: true
   options:
     vvv: true
