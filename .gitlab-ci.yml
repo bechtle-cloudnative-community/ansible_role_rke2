@@ -11,6 +11,6 @@
   molecule:
     stage: test
     script:
-      - env && molecule test
+      - molecule test
   
   
