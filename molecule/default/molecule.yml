@@ -27,8 +27,6 @@ platforms:
 provisioner:
   name: ansible
   log: true
-  options:
-    vvv: true
   inventory:
     host_vars:
       ansible-rke2-server-1:
