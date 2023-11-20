@@ -1,10 +1,10 @@
 ---
 
-# Insatall pip
-- name: Install PIP package
-  ansible.builtin.apt:
-    name: python3-netaddr
-    state: present
+# # Insatall pip
+# - name: Install PIP package
+#   ansible.builtin.apt:
+#     name: python3-netaddr
+#     state: present
 
 # This task file is itended to solve Requirements
 # Solve issue https://docs.rke2.io/known_issues#firewalld
