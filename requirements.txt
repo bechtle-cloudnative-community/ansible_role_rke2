@@ -10,3 +10,4 @@ openshift
 pyvim
 pyvmomi
 PyYAML
+jmespath
