@@ -1,8 +1,8 @@
 ---
 dependency:
   name: galaxy
-driver:
-  name: molecule_kubevirt
+  options:
+    requirements-file: requirements.yml
 platforms:
   - name: ansible-rke2-server-1
     namespace: devops
