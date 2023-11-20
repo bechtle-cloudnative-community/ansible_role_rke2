@@ -32,9 +32,6 @@ provisioner:
       ansible-rke2-server-1:
         rke2_type: server
         rke2_primary: true
-        fqdn: "{{ inventory_name }}.example.com"
-      ansible-rke2-agent-1:
-        rke2_type: agent
-        fqdn: "{{ inventory_name }}.example.com"
+
 verifier:
   name: ansible

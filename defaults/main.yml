@@ -36,12 +36,12 @@ rke2_bind_address: 0.0.0.0
 #  - A layer 4 (TCP) load balancer
 #  - Round-robin DNS1
 #  - Virtual or elastic IP addresses
-rke2_cluster_fqdn: ansible-rke2-server-1
+rke2_cluster_fqdn: "{{ cluster_fqdn  | default('ansible-rke2-server-1') }}"
 
 # Subject alternative names for the Server and Cluster API to accept
 # FQDN or IPv4 of the Server Nodes
 rke2_tls_san:
-  - "{{ cluster_fqdn }}"
+  - "{{ rke2_cluster_fqdn }}"
 
 # Cluster IP Address Range for the Pods and Services. Set to RKE2 defaulte
 rke2_cluster_cidr: 10.42.0.0/16
