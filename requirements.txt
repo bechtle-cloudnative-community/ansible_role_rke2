@@ -3,7 +3,7 @@ Jinja2
 jsonschema
 kubernetes
 lxml
-molecule==4.0.1
+molecule
 molecule-kubevirt
 molecule-docker
 openshift
