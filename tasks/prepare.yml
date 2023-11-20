@@ -67,6 +67,7 @@
       - apt-transport-https
       - curl
       - wget
+      - pgpgpg
     state: present
 
 - name: Install and load kubctl package
