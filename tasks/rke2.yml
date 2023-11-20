@@ -1,25 +1,25 @@
 # Download the install Script
 - name: Download RKE2 install.sh
   ansible.builtin.get_url:
-    url: "{{ channel_url }}"
-    dest: "{{ install_sh }}"
+    url: "{{ rke2_channel_url }}"
+    dest: "{{ rke2_install_script }}"
     mode: "0755"
     owner: root
     group: root
-  when: update
+  when: rke2_update
 
 # Install Script for Server
 - name: Execute install Script
   register: install_sh_out
   environment:
     INSTALL_RKE2_TYPE: "{{ rke2_type }}"
-    INSTALL_RKE2_CHANNEL: "{{ channel }}"
-  when: update
-  changed_when: update
+    INSTALL_RKE2_CHANNEL: "{{ rke2_channel }}"
+  when: rke2_update
+  changed_when: rke2_update
   notify:
     - "Restart rke2"
   ansible.builtin.command:
-    cmd: "{{ install_sh }}"
+    cmd: "{{ rke2_install_script }}"
 
 - name: Check if RKE2 is Started and enabled
   ansible.builtin.service:

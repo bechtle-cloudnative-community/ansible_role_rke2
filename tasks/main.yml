@@ -12,7 +12,7 @@
 
 # Manage RKE2 on Primary Server node (Master)
 - name: Manage RKE2 Server primary
-  when: '"server" in rke2_type and primary'
+  when: '"server" in rke2_type and rke2_primary'
   block:
     # Include of token.yml for Checking for token file
     - name: Generate token - RKE2 Server
@@ -34,7 +34,7 @@
 
 # Manage RKE2 on Primary Server node (Secondary)
 - name: Manage RKE2 Server secondary
-  when: '"server" in rke2_type and not primary'
+  when: '"server" in rke2_type and not rke2_primary'
   throttle: 1
   block:
 
@@ -85,10 +85,10 @@
   throttle: 1
   vars:
     jsonpath: '{@.status.conditions[?(@.type==''"''Ready''"'')].message}'
-    kubectl: /var/lib/rancher/rke2/bin/kubectl
+    # kubectl: /var/lib/rancher/rke2/bin/kubectl
     kubectle_config: /etc/rancher/rke2/rke2.yaml
   ansible.builtin.shell: |
-    {{ kubectl }} get node {{ item.split(".")[0] }} -o jsonpath='{{ jsonpath }}' --kubeconfig {{ kubectle_config }}
+    kubectl get node {{ item.split(".")[0] }} -o jsonpath='{{ jsonpath }}' --kubeconfig {{ kubectle_config }}
   args:
     executable: /bin/bash
   changed_when: false

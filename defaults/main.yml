@@ -4,9 +4,10 @@
 # For Server(Control Plane): server
 # For Agent(Worker): agent
 rke2_type: server
-primary: false
+rke2_primary: false
+rke2_node_taint: false
 
-check_update: true
+rke2_check_update: true
 
 # Set the RKE2 Version
 # default is stable. for more Information:
@@ -14,19 +15,19 @@ check_update: true
 # - testing
 # - latest
 # - stable
-channel: stable
+rke2_channel: latest
 
 # RKE2 Install url
-channel_url: https://get.rke2.io
+rke2_channel_url: https://get.rke2.io
 
 # RKE2 install Shell Script path and name
-install_sh: /usr/local/bin/rke2_install.sh
+rke2_install_script: /usr/local/bin/rke2_install.sh
 
-# Set RKE2 
+# Set RKE2
 # Set of the most commen values for rke2 config option
 # https://docs.rke2.io/reference/server_config
 # Address to listen on
-bind_address: 0.0.0.0
+rke2_bind_address: 0.0.0.0
 
 # Cluster Address for loadbalancing. Necessary for continius and availability.
 # https://docs.rke2.io/install/ha
@@ -35,26 +36,26 @@ bind_address: 0.0.0.0
 #  - A layer 4 (TCP) load balancer
 #  - Round-robin DNS1
 #  - Virtual or elastic IP addresses
-cluster_fqdn: ansible-rke2-server-1
+rke2_cluster_fqdn: ansible-rke2-server-1
 
 # Subject alternative names for the Server and Cluster API to accept
 # FQDN or IPv4 of the Server Nodes
-tls_san:
+rke2_tls_san:
   - "{{ cluster_fqdn }}"
-  
-# Cluster IP Address Range for the Pods and Services. Set to RKE2 defaulte
-cluster_cidr: 10.42.0.0/16
-service_cidr: 10.43.0.0/16
 
-cni:
+# Cluster IP Address Range for the Pods and Services. Set to RKE2 defaulte
+rke2_cluster_cidr: 10.42.0.0/16
+rke2_service_cidr: 10.43.0.0/16
+
+rke2_cni:
   - multus
   - canal
 
-disable_service:
+rke2_disable_service:
   - rke2-ingress-nginx
 
 # Path Config file
-template_config: config.yaml.j2
-config_path: /etc/rancher/rke2
-config_file: "{{ config_path }}/config.yaml"
-token_file: /var/lib/rancher/rke2/server/node-token
+rke2_template_config: config.yaml.j2
+rke2_config_path: /etc/rancher/rke2
+rke2_config_file: "{{ rke2_config_path }}/config.yaml"
+rke2_token_file: /var/lib/rancher/rke2/server/node-token

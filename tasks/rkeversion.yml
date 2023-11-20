@@ -15,15 +15,18 @@
 
 - name: Get installed version from node
   ansible.builtin.shell:
-    cmd: rke2 --version | cut -d ' ' -f 3 | head -n1 || echo "not installed"
-  changed_when: '"not installed" in rke2_installed_version.stdout '
+    cmd: |
+      set -o pipefail
+      rke2 --version | cut -d ' ' -f 3 | head -n1 || echo "not installed"
+    executable: /bin/bash
+  changed_when: '"not installed" in rke2_installed_version.stdout'
   register: rke2_installed_version
 
 - name: Set version as fact
   ansible.builtin.set_fact:
     rke2_latest_version: "{{ rke2_version_list.content | from_json | community.general.json_query(rke2_version_query) }}"
   vars:
-    rke2_version_query: "data[?id=='{{ channel }}'].latest"
+    rke2_version_query: "data[?id=='{{ rke2_channel }}'].latest"
   when: rke2_version_list.status != 503
 
 - name: Set version as fact
@@ -33,8 +36,8 @@
 
 - name: Change update Status
   ansible.builtin.set_fact:
-    update: true
+    rke2_update: true
   when:
-    - check_update
+    - rke2_check_update
     - 'rke2_installed_version.changed or rke2_latest_version[0] != rke2_installed_version.stdout'
     - rke2_version_list.status != 503

@@ -1,17 +1,15 @@
 ---
-  default:
-    image: registry.gitlab-bs.demolab.ch:4567/ansible-ee/ansible_ee_vmware:latest
-  stages:
-    - test
-  
-  variables:
-    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip"
-    GIT_STRATEGY: clone
+default:
+  image: registry.gitlab-bs.demolab.ch:4567/ansible-ee/ansible_ee_vmware:latest
+stages:
+  - test
 
-  molecule:
-    stage: test
-    script:
-      - sed 's/1024/4096/g' -i /usr/local/lib/python3.11/site-packages/molecule_kubevirt/playbooks/create.yml
-      - molecule test
-  
-  
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip"
+  GIT_STRATEGY: clone
+
+molecule:
+  stage: test
+  script:
+    - sed 's/1024/4096/g' -i /usr/local/lib/python3.11/site-packages/molecule_kubevirt/playbooks/create.yml
+    - molecule test

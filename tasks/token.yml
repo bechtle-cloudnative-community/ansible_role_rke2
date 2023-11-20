@@ -7,7 +7,7 @@
 - name: Check RKE2 Token File
   delegate_to: "{{ item }}"
   ansible.builtin.stat:
-    path: "{{ token_file }}"
+    path: "{{ rke2_token_file }}"
   register: token_stat
   loop: "{{ play_hosts }}"
 
@@ -15,7 +15,7 @@
 - name: Read RKE2 Token File
   delegate_to: "{{ token_node.item }}"
   ansible.builtin.slurp:
-    path: "{{ token_file }}"
+    path: "{{ rke2_token_file }}"
   when: token_node.stat.exists
   register: token_b64
   loop: "{{ token_stat.results }}"
@@ -25,20 +25,20 @@
 # Read Token value to facts
 - name: Set token to facts for all
   ansible.builtin.set_fact:
-    token: "{{ item.content | b64decode }}"
+    rke2_token: "{{ item.content | b64decode }}"
   when: item.content is defined
   loop: "{{ token_b64.results }}"
 
 # Read Token value to facts
 - name: Set token to facts for primary
   ansible.builtin.set_fact:
-    token: "{{ token | split(':') | last }}"
-  when: primary and token is defined
+    rke2_token: "{{ rke2_token | split(':') | last }}"
+  when: rke2_primary and rke2_token is defined
   loop: "{{ token_b64.results }}"
 
   # Read Token value to facts
 - name: Set token to facts
   ansible.builtin.set_fact:
-    token: "{{ lookup('community.general.random_string', special=false, length=32) }}\n"
-  when: primary and token is undefined
+    rke2_token: "{{ lookup('community.general.random_string', special=false, length=32) }}\n"
+  when: rke2_primary and rke2_token is undefined
   loop: "{{ token_b64.results }}"

@@ -31,7 +31,7 @@ provisioner:
     host_vars:
       ansible-rke2-server-1:
         rke2_type: server
-        primary: true
+        rke2_primary: true
         fqdn: "{{ inventory_name }}.example.com"
       ansible-rke2-agent-1:
         rke2_type: agent

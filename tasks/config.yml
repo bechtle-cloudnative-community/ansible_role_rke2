@@ -2,7 +2,7 @@
 - name: Template Config File
   ansible.builtin.template:
     src: config.yaml.j2
-    dest: "{{ config_file }}"
+    dest: "{{ rke2_config_file }}"
     mode: "0644"
     owner: root
     group: root
