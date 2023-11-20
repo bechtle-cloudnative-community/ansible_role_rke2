@@ -2,7 +2,7 @@
 dependency:
   name: galaxy
 driver:
-  name: kubevirt
+  name: molecule_kubevirt
 platforms:
   - name: ansible-rke2-server-1
     namespace: devops
