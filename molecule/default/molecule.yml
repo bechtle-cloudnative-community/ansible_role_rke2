@@ -14,16 +14,16 @@ platforms:
           path: /disk/debian-11.qcow2
     ssh_service:
       type: ClusterIP
-  - name: ansible-rke2-agent-1
-    namespace: devops
-    molecule_user: molecule
-    volumes:
-      - name: boot
-        containerDisk:
-          image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
-          path: /disk/debian-11.qcow2
-    ssh_service:
-      type: ClusterIP
+  # - name: ansible-rke2-agent-1
+  #   namespace: devops
+  #   molecule_user: molecule
+  #   volumes:
+  #     - name: boot
+  #       containerDisk:
+  #         image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
+  #         path: /disk/debian-11.qcow2
+  #   ssh_service:
+  #     type: ClusterIP
 provisioner:
   name: ansible
   log: true
@@ -32,6 +32,9 @@ provisioner:
       ansible-rke2-server-1:
         rke2_type: server
         rke2_primary: true
-
+        fqdn: "{{ inventory_name }}.example.com"
+      # ansible-rke2-agent-1:
+      #   rke2_type: agent
+      #   fqdn: "{{ inventory_name }}.example.com"
 verifier:
   name: ansible
