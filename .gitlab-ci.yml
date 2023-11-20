@@ -30,9 +30,9 @@ before_script:
   - python3 -m venv ../molecule-ve
   - source ../molecule-ve/bin/activate
   - pip install -r requirements.txt
-  
+
 molecule:
   stage: test
   script:
-    - sed 's/1024/4096/g' -i /usr/local/lib/python3.11/site-packages/molecule_kubevirt/playbooks/create.yml
+   # - sed 's/1024/4096/g' -i /usr/local/lib/python3.11/site-packages/molecule_kubevirt/playbooks/create.yml
     - molecule test
