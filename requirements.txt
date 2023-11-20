@@ -11,3 +11,4 @@ pyvim
 pyvmomi
 PyYAML
 jmespath
+netaddr
