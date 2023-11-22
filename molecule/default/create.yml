@@ -206,14 +206,14 @@
         host: "{{ item.address }}"
         delay: "{{ item.ssh_delay | default(default_ssh_delay) }}"
 
-    - name: Create hosts file
-      become: true
-      loop: "{{ instance_conf | default([]) }}"
-      ansible.builtin.lineinfile:
-        path: /etc/hosts
-        regexp: '.* {{ item.instance }}'
-        line: '{{ item.address }} {{ item.instance }}'
-        state: present
+    # - name: Create hosts file
+    #   become: true
+    #   loop: "{{ instance_conf | default([]) }}"
+    #   ansible.builtin.lineinfile:
+    #     path: /etc/hosts
+    #     regexp: '.* {{ item.instance }}'
+    #     line: '{{ item.address }} {{ item.instance }}'
+    #     state: present
 
     - name: Dump instance config
       ansible.builtin.copy:
