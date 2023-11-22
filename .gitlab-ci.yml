@@ -5,18 +5,18 @@ default:
 stages:          # List of stages for jobs and their order of execution
   - test
 
-variables:
-  # When using dind, it's wise to use the overlayfs driver for improved performance.
-  DOCKER_DRIVER: overlay2
-  # For non-Kubernetes executors, we use tcp://docker:2375
-  # DOCKER_HOST: tcp://docker:2375
-  # Instead of using TLS (https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#tls-enabled), set certs dir to
-  # the empty value as a workaround with dind: ~> 19.x
-  # DOCKER_TLS_CERTDIR: ""
-  PY_COLORS: 1
+# variables:
+#   # When using dind, it's wise to use the overlayfs driver for improved performance.
+#   DOCKER_DRIVER: overlay2
+#   # For non-Kubernetes executors, we use tcp://docker:2375
+#   # DOCKER_HOST: tcp://docker:2375
+#   # Instead of using TLS (https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#tls-enabled), set certs dir to
+#   # the empty value as a workaround with dind: ~> 19.x
+#   # DOCKER_TLS_CERTDIR: ""
+#   PY_COLORS: 1
 
-services:
-  - docker:stable-dind
+# services:
+#   - docker:stable-dind
 
 # before_script:
 #   # ssh setup
