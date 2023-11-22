@@ -1,31 +1,35 @@
 ---
 default:
-  image: registry.gitlab-bs.demolab.ch:4567/ansible-roles/rke2/ansible_rke2_ee:latest
+  image: python:latest
 
 stages:          # List of stages for jobs and their order of execution
   - test
 
-# variables:
-#   # When using dind, it's wise to use the overlayfs driver for improved performance.
-#   DOCKER_DRIVER: overlay2
-#   # For non-Kubernetes executors, we use tcp://docker:2375
-#   # DOCKER_HOST: tcp://docker:2375
-#   # Instead of using TLS (https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#tls-enabled), set certs dir to
-#   # the empty value as a workaround with dind: ~> 19.x
-#   # DOCKER_TLS_CERTDIR: ""
-#   PY_COLORS: 1
+variables:
+  # When using dind, it's wise to use the overlayfs driver for improved performance.
+  DOCKER_DRIVER: overlay2
+  # For non-Kubernetes executors, we use tcp://docker:2375
+  #DOCKER_HOST: tcp://docker:2375
+  # Instead of using TLS (https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#tls-enabled), set certs dir to
+  # the empty value as a workaround with dind: ~> 19.x
+  #DOCKER_TLS_CERTDIR: ""
+  PY_COLORS: 1
 
-# services:
-#   - docker:stable-dind
-
+services:
+  - docker:stable-dind
+ 
 before_script:
   # ssh setup
-  - cd /runner
   - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
   - eval $(ssh-agent -s)
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa_gitlab
+
+  # python env
+  - python3 -m venv ../molecule-ve
+  - source ../molecule-ve/bin/activate
+  - pip install -r ansible_rke2_ee/requirements.txt
 
 molecule:
   stage: test
