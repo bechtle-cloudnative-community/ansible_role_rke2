@@ -1,0 +1,12 @@
+---
+ansible-navigator:
+  execution-environment:
+    image: registry.gitlab-bs.demolab.ch:4567/ansible-roles/rke2/ansible_rke2_ee:latest
+    pull:
+      policy: always
+    environment-variables:
+      set:
+        KUBECONFIG: /home/runner/.kube/rke2.yaml
+    volume-mounts:
+      - src: "/home/dago/.kube/"
+        dest: "/home/runner/.kube"
