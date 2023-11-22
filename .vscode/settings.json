@@ -1,3 +1,5 @@
 {
-    "ansible.executionEnvironment.image": "registry.gitlab-bs.demolab.ch:4567/ansible-ee/ansible_ee_vmware:latest"
+    "ansible.executionEnvironment.enabled": true,
+    "ansible.executionEnvironment.image": "registry.gitlab-bs.demolab.ch:4567/ansible-roles/rke2/ansible_rke2_ee:latest",
+    "ansible.executionEnvironment.pull.policy": "always",
 }

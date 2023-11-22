@@ -29,6 +29,24 @@
       ansible.builtin.include_tasks:
         file: rke2.yml
 
+    # - name: Fetch kubectle_config
+    #   ansible.builtin.fetch:
+    #     src: /etc/rancher/rke2/rke2.yaml
+    #     dest: '/tmp/rke2.yaml'
+    #     flat: true
+
+    # - name: Replace localhost
+    #   connection: local
+    #   delegate_to: localhost
+    #   ansible.builtin.replace:
+    #     path: /tmp/rke2.yaml
+    #     regexp: '(https://).*(:6443)'
+    #     replace: '\1{{ rke2_cluster_fqdn }}\2'
+
+    - name: Ensure Cluster is Ready
+      ansible.builtin.include_tasks:
+        file: k8s_check.yml
+
     - name: Force running handlers
       ansible.builtin.meta: flush_handlers
 
@@ -52,6 +70,10 @@
     - name: Install/Update - RKE2 Server
       ansible.builtin.include_tasks:
         file: rke2.yml
+
+    - name: Ensure Cluster is Ready
+      ansible.builtin.include_tasks:
+        file: k8s_check.yml
 
     - name: Force running handlers
       ansible.builtin.meta: flush_handlers
@@ -78,23 +100,9 @@
       ansible.builtin.include_tasks:
         file: rke2.yml
 
+    - name: Ensure Cluster is Ready
+      ansible.builtin.include_tasks:
+        file: k8s_check.yml
+
     - name: Force running handlers
       ansible.builtin.meta: flush_handlers
-
-- name: Wait til nodes in cluster are ready
-  throttle: 1
-  vars:
-    jsonpath: '{@.status.conditions[?(@.type==''"''Ready''"'')].message}'
-    # kubectl: /var/lib/rancher/rke2/bin/kubectl
-    kubectle_config: /etc/rancher/rke2/rke2.yaml
-  ansible.builtin.shell: |
-    kubectl get node {{ item.split(".")[0] }} -o jsonpath='{{ jsonpath }}' --kubeconfig {{ kubectle_config }}
-  args:
-    executable: /bin/bash
-  changed_when: false
-  when: rke2_type == 'server'
-  until: '"ready status" in node_status.stdout'
-  retries: 30
-  delay: 3
-  register: node_status
-  loop: "{{ play_hosts }}"

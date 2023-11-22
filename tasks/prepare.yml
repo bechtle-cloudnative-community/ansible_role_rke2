@@ -68,6 +68,7 @@
       - curl
       - wget
       - pgpgpg
+      - python3-kubernetes
     state: present
 
 - name: Install and load kubctl package

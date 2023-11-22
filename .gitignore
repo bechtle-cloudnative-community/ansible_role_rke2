@@ -1,3 +1,6 @@
 ansible-navigator.log
 rke2.yaml
 python-runtime
+archive
+.vscode/settings.json
+ansible_rke2_ee/context

@@ -1,7 +1,7 @@
 ---
 # This is an example playbook to execute Ansible tests.
 - name: Verify
-  hosts: server
+  hosts: all
   become: true
   gather_facts: true
   strategy: linear

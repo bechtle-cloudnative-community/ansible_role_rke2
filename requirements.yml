@@ -5,4 +5,5 @@ collections:
   - name: community.general
     source: https://old-galaxy.ansible.com
   - name: community.kubevirt
+  - name: community.kubernetes
   - name: ansible.utils
