@@ -47,9 +47,6 @@
       ansible.builtin.include_tasks:
         file: k8s_check.yml
 
-    - name: Force running handlers
-      ansible.builtin.meta: flush_handlers
-
 # Manage RKE2 on Primary Server node (Secondary)
 - name: Manage RKE2 Server secondary
   when: '"server" in rke2_type and not rke2_primary'
@@ -74,9 +71,6 @@
     - name: Ensure Cluster is Ready
       ansible.builtin.include_tasks:
         file: k8s_check.yml
-
-    - name: Force running handlers
-      ansible.builtin.meta: flush_handlers
 
 
 # Manage RKE2 on Agent node (Worker)
@@ -103,6 +97,3 @@
     - name: Ensure Cluster is Ready
       ansible.builtin.include_tasks:
         file: k8s_check.yml
-
-    - name: Force running handlers
-      ansible.builtin.meta: flush_handlers

@@ -10,9 +10,12 @@
 # Solve issue https://docs.rke2.io/known_issues#firewalld
 # Uninstall firewalld if installed
 - name: Update Cache
+  register: apt_cache_update
+  changed_when: apt_cache_update is failed
+  when: ansible_facts['os_family'] == "Debian"
   ansible.builtin.apt:
     update_cache: true
-  when: ansible_facts['os_family'] == "Debian"
+
 - name: Uninstall firewalld
   ansible.builtin.package:
     name: firewalld

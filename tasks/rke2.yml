@@ -22,7 +22,9 @@
     cmd: "{{ rke2_install_script }}"
 
 - name: Check if RKE2 is Started and enabled
-  ansible.builtin.service:
+  register: rke2_started
+  ansible.builtin.systemd:
+    daemon_reload: true
     name: "rke2-{{ rke2_type }}"
     enabled: true
     state: started

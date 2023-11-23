@@ -2,7 +2,17 @@
 - name: Converge
   hosts: all
   become: true
+  vars:
+    cluster_fqdn: "{{ inventory_hostname }}.example.com"
   tasks:
+    - name: Ensure hosts file
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        insertafter: '^127.0.0.1.*'
+        regexp: '.* {{ cluster_fqdn }}'
+        line: "127.0.0.1 {{ cluster_fqdn }}"
+        state: present
+
     - name: "Include bechtle.rke2"
       ansible.builtin.include_role:
         name: "bechtle.rke2"

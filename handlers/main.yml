@@ -1,7 +1,8 @@
 ---
 # handlers file for rke2
 - name: Restart rke2
-  ansible.builtin.service:
+  when: not rke2_started.changed
+  ansible.builtin.systemd:
     name: "rke2-{{ rke2_type }}"
     state: restarted
     enabled: true

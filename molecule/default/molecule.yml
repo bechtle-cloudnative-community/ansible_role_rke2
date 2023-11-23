@@ -6,8 +6,9 @@ dependency:
 platforms:
   - name: ansible-rke2-server-1
     namespace: devops
-    memory: "4Gi"
+    memory: "8Gi"
     storage_size: "10Gi"
+    cpu_cores: 4
     container_image: docker://registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
     ssh_service:
       type: ClusterIP
@@ -24,37 +25,6 @@ platforms:
               port: 6443
               targetPort: 6443
 
-    # dataVolumeTemplates:
-    #   - metadata:
-    #       name: pvc-nsible-rke2-server-1
-    #       namespace: devops
-    #     spec:
-    #       pvc:
-    #         accessModes:
-    #           - ReadWriteOnce
-    #         resources:
-    #           requests:
-    #             storage: 20Gi
-    #       preallocation: true
-    #       source:
-    #         registry:
-    #           url: docker://registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
-    # volumes:
-    #   - name: boot
-    #     dataVolume:
-    #       name: pvc-nsible-rke2-server-1
-    # ssh_service:
-    #   type: ClusterIP
-  # - name: ansible-rke2-agent-1
-  #   namespace: devops
-  #   molecule_user: molecule
-  #   volumes:
-  #     - name: boot
-  #       containerDisk:
-  #         image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-image-debian-11:latest
-  #         path: /disk/debian-11.qcow2
-  #   ssh_service:
-  #     type: ClusterIP
 provisioner:
   name: ansible
   log: true

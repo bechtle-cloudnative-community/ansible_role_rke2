@@ -12,6 +12,7 @@
     default_hashed_passwd: "{{ 'molecule' | password_hash('sha512',rounds=4096) }}"
     default_vm_memory: "2Gi"
     default_vm_machine_type: "q35"
+    default_cpu_cores: 1
     default_container_image: "docker://quay.io/kubevirt/fedora-cloud-container-disk-demo"
     default_storage_size: "5Gi"
     default_ssh_timeout: 300
@@ -54,6 +55,14 @@
         hostname: "{{ item.name }}"
         wait_timeout: 300
         wait: true
+        persist_config: true
+        cpu_limit: "{{ item.cpu_cores | default(default_cpu_cores) }}"
+        interfaces:
+          - name: default
+            macAddress: 00:11:22:aa:bb:cc
+            bridge: {}
+            network:
+              pod: {}
         cloud_init_nocloud:
           userData: |-
             #cloud-config
@@ -73,7 +82,7 @@
             pvc:
               accessModes:
                 - ReadWriteOnce
-              storage: "{{ item.sotrage_size | default(default_storage_size) }}"
+              storage: "{{ item.storage_size | default(default_storage_size) }}"
 
 
     - name: Deal with ssh services
