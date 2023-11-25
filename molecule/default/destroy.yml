@@ -6,23 +6,24 @@
   no_log: "{{ molecule_no_log }}"
   tasks:
     - name: Delete VM
-      community.kubevirt.kubevirt_vm:
+      kubevirt.core.kubevirt_vm:
         state: absent
         name: "{{ item.name }}"
         namespace: "{{ item.namespace | default('default') }}"
+        wait: true
       loop: "{{ molecule_yml.platforms }}"
       loop_control:
         label: "{{ item.name }}"
 
-    - name: Delete cloud init
-      kubernetes.core.k8s:
-        state: absent
-        kind: Secret
-        name: "{{ item.name }}"
-        namespace: "{{ item.namespace | default('default') }}"
-      loop: "{{ molecule_yml.platforms }}"
-      loop_control:
-        label: "{{ item.name }}"
+    # - name: Delete cloud init
+    #   kubernetes.core.k8s:
+    #     state: absent
+    #     kind: Secret
+    #     name: "{{ item.name }}"
+    #     namespace: "{{ item.namespace | default('default') }}"
+    #   loop: "{{ molecule_yml.platforms }}"
+    #   loop_control:
+    #     label: "{{ item.name }}"
 
     - name: Delete ssh service
       kubernetes.core.k8s:
@@ -41,11 +42,3 @@
       loop: "{{ molecule_yml.platforms }}"
       loop_control:
         label: "{{ item.name }}"
-
-    - name: Delete hosts entry
-      become: true
-      loop: "{{ molecule_yml.platforms }}"
-      ansible.builtin.lineinfile:
-        path: /etc/hosts
-        regexp: '.* {{ item.name }}'
-        state: absent

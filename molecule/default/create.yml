@@ -7,12 +7,12 @@
   vars:
     default_namespace: "default"
     default_run_strategy: "Always"
-    default_ssh_key_path: "{{ molecule_ephemeral_directory }}/identity_{{ item.name }}"
+    ssh_key_path: "{{ molecule_ephemeral_directory }}/identity_{{ item.name }}"
     default_user_molecule: "molecule"
     default_hashed_passwd: "{{ 'molecule' | password_hash('sha512',rounds=4096) }}"
     default_vm_memory: "2Gi"
     default_vm_machine_type: "q35"
-    default_cpu_cores: 1
+    default_vm_cpu: 1
     default_container_image: "docker://quay.io/kubevirt/fedora-cloud-container-disk-demo"
     default_storage_size: "5Gi"
     default_ssh_timeout: 300
@@ -25,11 +25,11 @@
   tasks:
 
     - name: Create ssh key from Enviroment
-      when: item.ssh_key is defined
       loop: "{{ molecule_yml.platforms }}"
+      when: item.ssh_key is defined
       ansible.builtin.copy:
         src: '{{ item.ssh_key }}'
-        dest: "{{ default_ssh_key_path }}"
+        dest: "{{ ssh_key_path }}"
         mode: '0600'
 
     - name: Create ssh key pair
@@ -38,191 +38,32 @@
       loop_control:
         label: "{{ item.name }}"
       community.crypto.openssh_keypair:
-        path: "{{ default_ssh_key_path }}"
+        path: "{{ ssh_key_path }}"
         state: present
         size: 4096
         type: rsa
 
-    - name: Create virtual machines
+    - name: Import create VM task
       loop: "{{ molecule_yml.platforms }}"
       loop_control:
         label: "{{ item.name }}"
-      community.kubevirt.kubevirt_vm:
-        name: "{{ item.name }}"
-        namespace: "{{ item.namespace | default(default_namespace) }}"
-        memory: "{{ item.memory | default(default_vm_memory) }}"
-        state: running
-        hostname: "{{ item.name }}"
-        wait_timeout: 300
-        wait: true
-        persist_config: true
-        cpu_limit: "{{ item.cpu_cores | default(default_cpu_cores) }}"
-        interfaces:
-          - name: default
-            macAddress: 00:11:22:aa:bb:cc
-            bridge: {}
-            network:
-              pod: {}
-        cloud_init_nocloud:
-          userData: |-
-            #cloud-config
-            users:
-              - name: {{ default_user_molecule }}
-                hash_passwd: {{ default_hashed_passwd }}
-                lock_passwd: false
-                ssh_authorized_keys:
-                  - {{ lookup('file', default_ssh_key_path + '.pub') }}
-                sudo:
-                  - ALL=(ALL) NOPASSWD:ALL
-        datavolumes:
-          - name: "pvc-{{ item.name }}-root"
-            source:
-              registry:
-                url: "{{ item.container_image | default(default_container_image) }}"
-            pvc:
-              accessModes:
-                - ReadWriteOnce
-              storage: "{{ item.storage_size | default(default_storage_size) }}"
+      ansible.builtin.include_tasks:
+        file: create_vm_task.yml
 
+    # - name: Convert instance config dict to a list
+    #   ansible.builtin.set_fact:
+    #     instance_conf: "{{ instance_config_dict.results | map(attribute='ansible_facts.instance_conf_dict') | list }}"
 
-    - name: Deal with ssh services
-      when: "item.ssh_service | default(None)"
-      block:
-        - name: Create ssh NodePort Kubernetes Services
-          when: "item.ssh_service.type | default(default_ssh_service_type) == 'NodePort'"
-          register: node_port_services
-          loop: "{{ molecule_yml.platforms }}"
-          loop_control:
-            label: "{{ item.name }}"
-          vars:
-            spec: |-
-              selector:
-                vm.cnv.io/name: "{{ item.name }}"
-              type: NodePort
-              ports:
-                - port: 22
-                  protocol: TCP
-                  targetPort: 22
-                  {%- if item.ssh_service.nodePort | default(None) +%}
-                  nodePort: {{ item.ssh_service.nodePort | int }}
-                  {%- endif +%}
-          kubernetes.core.k8s:
-            state: present
-            definition:
-              apiVersion: v1
-              kind: Service
-              metadata:
-                name: "{{ item.name }}"
-                namespace: "{{ item.namespace | default(default_namespace) }}"
-              # workaround https://stackoverflow.com/questions/63961938/ansible-variable-conversion-to-int-is-ignored
-              spec: "{{ spec | from_yaml }}"
-
-        - name: Create ssh ClusterIP Kubernetes Services
-          when: "item.ssh_service.type | default(default_ssh_service_type) == 'ClusterIP'"
-          kubernetes.core.k8s:
-            state: present
-            definition:
-              apiVersion: v1
-              kind: Service
-              metadata:
-                name: "{{ item.name }}"
-                namespace: "{{ item.namespace | default(default_namespace) }}"
-              spec:
-                clusterIP: "{{ item.ssh_service.clusterIP | default(omit) }}"
-                ports:
-                  - port: 22
-                    protocol: TCP
-                    targetPort: 22
-                selector:
-                  vm.cnv.io/name: "{{ item.name }}"
-                type: ClusterIP
-          register: cluster_ip_services
-          loop: "{{ molecule_yml.platforms }}"
-          loop_control:
-            label: "{{ item.name }}"
-
-    - name: Deal with ssh services
-      loop: "{{ molecule_yml.platforms }}"
-      loop_control:
-        label: "{{ item.name }}"
-      when: "item.custom_service | default(None)"
-      kubernetes.core.k8s:
-        state: present
-        definition:
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: "{{ item.name }}"
-            namespace: "{{ item.namespace | default(default_namespace) }}"
-
-    - name: Get ip for VirtualMachineInstance for ssh access
-      kubernetes.core.k8s_info:
-        kind: VirtualMachineInstance
-        namespace: "{{ item.namespace | default(default_namespace) }}"
-        name: "{{ item.name }}"
-      loop: "{{ molecule_yml.platforms }}"
-      loop_control:
-        label: "{{ item.name }}"
-      register: virtual_machine_info
-      retries: "{{ item.pod_ip_retries | default(default_pod_ip_retries) }}"
-      delay: "{{ item.pod_ip_delay | default(default_pod_ip_delay) }}"
-      until: "virtual_machine_info.resources[0].status.interfaces[0].ipAddress | default(None)"
-      when:
-        - item.ssh_service is undefined
-        - item.run_strategy | default(default_run_strategy) != 'Halted'
-        - item.running|default(true)
-
-    - name: Populate instance config dict
-      ansible.builtin.set_fact:
-        instance_conf_dict:
-          # if not running, ssh access will not be tested
-          ssh_test: "{{ item.run_strategy | default(default_run_strategy) != 'Halted' and item.running | default(None) != false }}"
-          instance: "{{ item.name }}"
-          address: "{{ ssh_service_address }}"
-          user: "{{ item.user_molecule | default(default_user_molecule) }}"
-          port: "22"
-          identity_file: "{{ molecule_ephemeral_directory }}/identity_{{ item.name }}"
-      vars:
-        vmi: "{{ virtual_machine_info.results | selectattr('item.name', '==', item.name) | first }}"
-        # Also: should get a 'local node port' for nodePort kind usage for example
-        ssh_service_address: >-
-          {%- set svc_type = item.ssh_service.type | default(None) -%}
-          {%- if not svc_type -%}
-            {{ ((vmi['resources'] | first)['status']['interfaces'] | first)['ipAddress'] }}
-          {%- elif svc_type == 'NodePort' -%}
-            {{ item.ssh_service.nodePort_host | default('localhost') }}:
-            {{- ((node_port_services.results | selectattr('item.name', '==', item.name) | first)['result']['spec']['ports'] | first)['nodePort'] }}
-          {%- elif svc_type == 'ClusterIP' -%}
-            {{ (cluster_ip_services.results | selectattr('item.name', '==', item.name) | first)['result']['spec']['clusterIP'] }}
-          {%- endif -%}
-      register: instance_config_dict
-      loop: "{{ molecule_yml.platforms }}"
-      loop_control:
-        label: "{{ item.name }}"
-
-    - name: Convert instance config dict to a list
-      ansible.builtin.set_fact:
-        instance_conf: "{{ instance_config_dict.results | map(attribute='ansible_facts.instance_conf_dict') | list }}"
-
-    - name: Ssh access test
-      loop: "{{ instance_conf | default([]) }}"
-      loop_control:
-        label: "{{ item.instance }} -> {{ item.address }} timeout={{ item.ssh_timeout | default(default_ssh_timeout) }}"
-      when: "item.ssh_test"
-      ansible.builtin.wait_for:
-        timeout: "{{ item.ssh_timeout | default(default_ssh_timeout) }}"
-        port: "{{ item.port | default('22') }}"
-        host: "{{ item.address }}"
-        delay: "{{ item.ssh_delay | default(default_ssh_delay) }}"
-
-    # - name: Create hosts file
-    #   become: true
+    # - name: Ssh access test
     #   loop: "{{ instance_conf | default([]) }}"
-    #   ansible.builtin.lineinfile:
-    #     path: /etc/hosts
-    #     regexp: '.* {{ item.instance }}'
-    #     line: '{{ item.address }} {{ item.instance }}'
-    #     state: present
+    #   loop_control:
+    #     label: "{{ item.instance }} -> {{ item.address }} timeout={{ item.ssh_timeout | default(default_ssh_timeout) }}"
+    #   when: "item.ssh_test"
+    #   ansible.builtin.wait_for:
+    #     timeout: "{{ item.ssh_timeout | default(default_ssh_timeout) }}"
+    #     port: "{{ item.port | default('22') }}"
+    #     host: "{{ item.address }}"
+    #     delay: "{{ item.ssh_delay | default(default_ssh_delay) }}"
 
     - name: Dump instance config
       ansible.builtin.copy:

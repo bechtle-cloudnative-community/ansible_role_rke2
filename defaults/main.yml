@@ -42,13 +42,10 @@ rke2_cluster_fqdn: "{{ cluster_fqdn | default('ansible-rke2-server-1') }}"
 # FQDN or IPv4 of the Server Nodes
 rke2_tls_san:
   - "{{ rke2_cluster_fqdn }}"
-  - "{{ ansible_default_ipv4['address'] }}"
-  - "{{ inventory_hostname }}"
-  - 127.0.0.1
 
 # Cluster IP Address Range for the Pods and Services. Set to RKE2 defaulte
-rke2_cluster_cidr: 10.42.0.0/16
-rke2_service_cidr: 10.43.0.0/16
+rke2_cluster_cidr: 10.50.0.0/16
+rke2_service_cidr: 10.51.0.0/16
 
 rke2_cni:
   - multus

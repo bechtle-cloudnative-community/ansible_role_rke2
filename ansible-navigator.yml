@@ -6,7 +6,7 @@ ansible-navigator:
       policy: always
     environment-variables:
       set:
-        KUBECONFIG: /home/runner/.kube/rke2.yaml
+        KUBECONFIG: /home/runner/.kube/config
     volume-mounts:
-      - src: "/home/dago/.kube/"
+      - src: "$HOME/.kube/"
         dest: "/home/runner/.kube"

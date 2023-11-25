@@ -1,0 +1,144 @@
+---
+- name: Create VM
+  block:
+
+    - name: Create virtual machines
+      kubevirt.core.kubevirt_vm:
+        name: "{{ item.name }}"
+        namespace: "{{ item.namespace | default(default_namespace) }}"
+        state: present
+        wait_timeout: 300
+        wait: true
+        running: true
+        labels:
+          ansible-molecule: "{{ item.name }}"
+          vm.cnv.io/name: "{{ item.name }}"
+        spec:
+          hostname: "{{ item.name }}"
+          subdomain: "molecule"
+          runStrategy: Always
+          domain:
+            cpu:
+              cores: 2
+            resources:
+              limits:
+                memory: "{{ item.memory | default(default_vm_memeory) }}"
+            devices:
+              disks:
+                - disk:
+                    bus: virtio
+                  name: rootdisk
+                - disk:
+                    bus: virtio
+                  name: cloudinit
+              interfaces:
+                - name: default
+                  masquerade: {}
+          networks:
+            - name: default
+              pod: {}
+          volumes:
+            - dataVolume:
+                name: "pvc-{{ item.name }}-root"
+              name: rootdisk
+            - cloudInitNoCloud:
+                userData: |-
+                  #cloud-config
+                  users:
+                    - name: {{ default_user_molecule }}
+                      hash_passwd: {{ default_hashed_passwd }}
+                      lock_passwd: false
+                      ssh_authorized_keys:
+                        - {{ lookup('file', ssh_key_path + '.pub') }}
+                      sudo:
+                        - ALL=(ALL) NOPASSWD:ALL
+              name: cloudinit
+        data_volume_templates:
+          - metadata:
+              name: "pvc-{{ item.name }}-root"
+              namespace: devops
+            spec:
+              source:
+                registry:
+                  url: "docker://{{ item.container_image }}"
+              storage:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: "{{ item.storage_size | default(default_storage_size) }}"
+
+    - name: Create ssh Kubernetes Services
+      register: node_k8s_svc
+      kubernetes.core.k8s:
+        state: present
+        wait: true
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: "{{ item.name }}"
+            namespace: "{{ item.namespace | default(default_namespace) }}"
+          spec:
+            selector:
+              ansible-molecule: "{{ item.name }}"
+              vm.cnv.io/name: "{{ item.name }}"
+            type: "{{ item.ssh_service.type }}"
+            clusterIP: "{{ item.ssh_service.clusterIP | default(omit) }}"
+            ports:
+              - port: 22
+                protocol: TCP
+                targetPort: 22
+
+    - name: Set ssh setting for Cluster IP
+      vars:
+        type: "{{ item.ssh_service.type }}"
+        ssh_ip: "{{ node_k8s_svc.result.spec.clusterIP }}"
+      when: type == 'ClusterIP'
+      ansible.builtin.set_fact:
+        instance_conf_dict:
+          # if not running, ssh access will not be tested
+          ssh_test: "{{ item.run_strategy | default(default_run_strategy) != 'Halted' and item.running | default(true) }}"
+          instance: "{{ item.name }}"
+          address: "{{ ssh_ip }}"
+          user: "{{ item.molecule_user | default(default_user_molecule) }}"
+          port: "22"
+          identity_file: "{{ molecule_ephemeral_directory }}/identity_{{ item.name }}"
+
+    - name: Set ssh setting for LoadBalancer Cluster IP
+      vars:
+        type: "{{ item.ssh_service.type }}"
+        ssh_ip: "{{ node_k8s_svc.result.status.loadBalancer.ingress[0].ip }}"
+      when: type == 'LoadBalancer'
+      ansible.builtin.set_fact:
+        instance_conf_dict:
+          # if not running, ssh access will not be tested
+          ssh_test: "{{ item.run_strategy | default(default_run_strategy) != 'Halted' and item.running | default(true) }}"
+          instance: "{{ item.name }}"
+          address: "{{ ssh_ip }}"
+          user: "{{ item.user_molecule | default(default_user_molecule) }}"
+          port: "22"
+          identity_file: "{{ molecule_ephemeral_directory }}/identity_{{ item.name }}"
+
+    - name: Create hosts file
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        regexp: '.* {{ instance_conf_dict.instance }}'
+        line: '{{ instance_conf_dict.address }} {{ instance_conf_dict.instance }}'
+        state: present
+
+    - name: Ssh access test
+      ansible.builtin.wait_for:
+        timeout: "{{ item.ssh_timeout | default(default_ssh_timeout) }}"
+        port: "{{ instance_conf_dict.port }}"
+        host: "{{ instance_conf_dict.address }}"
+        delay: "{{ item.ssh_delay | default(default_ssh_delay) }}"
+
+    - name: Convert instance config dict to a list
+      ansible.builtin.set_fact:
+        instance_conf: "{{ instance_conf | default([]) + [ instance_conf_dict ] }}"
+
+    - name: Debug
+      ansible.builtin.debug:
+        var: instance_conf
