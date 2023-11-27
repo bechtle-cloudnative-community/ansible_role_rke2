@@ -122,6 +122,7 @@
 
     - name: Create hosts file
       become: true
+      when: type == 'LoadBalancer'
       ansible.builtin.lineinfile:
         path: /etc/hosts
         regexp: '.* {{ instance_conf_dict.instance }}'
