@@ -11,7 +11,7 @@ platforms:
     cpu_cores: 4
     container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-ubuntu-22.04:latest
     ssh_service:
-      type: LoadBalancer
+      type: ClusterIP
     custom_manifest:
       - apiVersion: v1
         kind: Service
