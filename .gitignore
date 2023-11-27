@@ -3,6 +3,6 @@ ansible-navigator.yml
 rke2.yaml
 python-runtime
 archive
-.vscode/settings.json
+.vscode
 ansible_rke2_ee/context
 virctl
