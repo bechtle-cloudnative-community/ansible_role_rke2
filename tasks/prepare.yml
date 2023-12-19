@@ -13,8 +13,7 @@
   ansible.builtin.service_facts:
 
 - name: Ensure Firewalld is stopped
-  loop: ansible_facts.services
-  when: item.name == "firewalld.service"
+  when: '"firewalld.service" in ansible_facts.services '
   ansible.builtin.systemd:
     name: firewalld
     state: stopped
