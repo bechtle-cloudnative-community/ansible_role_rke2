@@ -8,6 +8,7 @@
 - name: Ensure YUM/DNF repository is added
   ansible.builtin.yum_repository:
     name: kubernetes
+    description: Kubernetes
     file: /etc/yum.repos.d/kubernetes.repo
     baseurl: https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
     enabled: true
