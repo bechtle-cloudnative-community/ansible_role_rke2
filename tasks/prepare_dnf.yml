@@ -18,6 +18,10 @@
     owner: root
     group: root
 
+- name: Enable a RHSM repository
+  community.general.rhsm_repository:
+    name: codeready-builder-for-rhel-9-x86_64-rpms
+
 - name: Install iptables
   ansible.builtin.dnf:
     name:
@@ -25,7 +29,6 @@
       - ca-certificates
       - curl
       - wget
-      - pgpgpg
       - python3-kubernetes
     state: present
 
