@@ -1,0 +1,34 @@
+---
+# This task file is itended to solve Requirements
+- name: Ensure firewalld is is Uninstalled
+  ansible.builtin.dnf:
+    name: firewalld
+    state: absent
+
+- name: Ensure YUM/DNF repository is added
+  ansible.builtin.yum_repository:
+    name: kubernetes
+    file: /etc/yum.repos.d/kubernetes.repo
+    baseurl: https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: Install iptables
+  ansible.builtin.dnf:
+    name:
+      - iptables
+      - ca-certificates
+      - curl
+      - wget
+      - pgpgpg
+      - python3-kubernetes
+    state: present
+
+- name: Install Kubectl
+  ansible.builtin.dnf:
+    name: kubectl
+    state: present

@@ -1,55 +1,49 @@
 ---
-
-# # Insatall pip
-# - name: Install PIP package
-#   ansible.builtin.apt:
-#     name: python3-netaddr
-#     state: present
+# Check and Prepare package Manager
+- name: Ensure ansible_pkg_mgr value is set
+  when: ansible_pkg_mgr is undefined
+  ansible.builtin.setup:
+    filter: 'ansible_pkg_mgr'
 
 # This task file is itended to solve Requirements
 # Solve issue https://docs.rke2.io/known_issues#firewalld
 # Uninstall firewalld if installed
-- name: Update Cache
-  register: apt_cache_update
-  changed_when: apt_cache_update is failed
-  when: ansible_facts['os_family'] == "Debian"
-  ansible.builtin.apt:
-    update_cache: true
 
-- name: Uninstall firewalld
-  ansible.builtin.package:
+- name: Populate service facts
+  ansible.builtin.service_facts:
+
+- name: Ensure Firewalld is stopped
+  loop: ansible_facts.services
+  when: item.name == "firewalld.service"
+  ansible.builtin.systemd:
     name: firewalld
-    state: absent
+    state: stopped
+    enabled: false
+    daemon_reload: true
 
 # Solve issue https://docs.rke2.io/known_issues#networkmanager
 # Check NetworkManager is installed on Debian
 - name: Check if NetworkManager is installed
-  ansible.builtin.shell:
-    cmd: |
-      set -o pipefail
-      dpkg-query -l network-manager | tail -n 1 | cut -d' ' -f 1
-    executable: /bin/bash
-  register: network_manager_package
-  changed_when: false
-  when: ansible_facts['os_family'] == "Debian"
+  register: network_manager
+  ansible.builtin.stat:
+    path: /etc/NetworkManager/conf.d
 
-# Change Canal network provider to unmanaged in network manager when package is present.
-# - name: Verify Canal and Flannel Interface are ignored by NetworkManager
-#   ansible.builtin.copy:
-#     content: >
-#       [keyfile]\n
-#       unmanaged-devices=interface-name:cali*;interface-name:flannel*
-#     dest: /etc/NetworkManager/conf.d/rke2-canal.conf
-#     owner: root
-#     group: root
-#     mode: "0644"
-#   when: '"ii" in network_manager_package.stdout or ansible_facts["os_family"] != "Debian"'
+- name: Verify Canal and Flannel Interface are ignored by NetworkManager
+  when: network_manager.stats.isdir
+  ansible.builtin.copy:
+    content: |
+      [keyfile]
+      unmanaged-devices=interface-name:cali*;interface-name:flannel*
+    dest: /etc/NetworkManager/conf.d/90-rke2-canal.conf
+    owner: root
+    group: root
+    mode: "0644"
 
 # Solve issue https://docs.rke2.io/known_issues#wicked
 # Activate IP Forwared
 - name: Verify IP Forward is in place
   ansible.builtin.copy:
-    content: >
+    content: |
       net.ipv4.conf.all.forwarding=1
       net.ipv6.conf.all.forwarding=1
       net.ipv4.conf.default.rp_filter=1
@@ -61,34 +55,9 @@
 
 # Solve issue https://docs.rke2.io/known_issues#canal-and-ip-exhaustion
 # Install iptables
-
-- name: Install iptables
-  ansible.builtin.package:
-    name:
-      - iptables
-      - ca-certificates
-      - apt-transport-https
-      - curl
-      - wget
-      - pgpgpg
-      - python3-kubernetes
-    state: present
-
-- name: Install and load kubctl package
-  ansible.builtin.apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    state: present
-
-- name: Load sources
-  ansible.builtin.apt_repository:
-    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
-    state: present
-
-- name: Install iptables
-  ansible.builtin.package:
-    name:
-      - kubectl
-    state: present
+- name: Ensure task for issue canal-and-ip-exhausion is included
+  ansible.builtin.include_tasks:
+    file: "prepare_{{ ansible_pkg_mgr }}.yml"
 
 # Create Directory for Config
 - name: Create conifuguration Directory
