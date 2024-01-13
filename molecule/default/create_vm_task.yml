@@ -22,7 +22,7 @@
               cores: 2
             resources:
               limits:
-                memory: "{{ item.memory | default(default_vm_memeory) }}"
+                memory: "{{ item.memory | default(default_vm_memory) }}"
             devices:
               disks:
                 - disk:
