@@ -68,9 +68,9 @@
       ansible.builtin.include_tasks:
         file: rke2.yml
 
-    - name: Ensure Cluster is Ready
-      ansible.builtin.include_tasks:
-        file: k8s_check.yml
+- name: Ensure Cluster is Ready
+  ansible.builtin.include_tasks:
+    file: k8s_check.yml
 
 
 # Manage RKE2 on Agent node (Worker)
@@ -94,6 +94,6 @@
       ansible.builtin.include_tasks:
         file: rke2.yml
 
-    - name: Ensure Cluster is Ready
-      ansible.builtin.include_tasks:
-        file: k8s_check.yml
+- name: Ensure Cluster is Ready
+  ansible.builtin.include_tasks:
+    file: k8s_check.yml

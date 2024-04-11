@@ -5,8 +5,6 @@ This Role is itended to install and update RKE2.
 
 Tested on: 
  - Debian 11
- - Ubuntu
- - RHEL 9
 
 Requirements
 ------------

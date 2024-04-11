@@ -28,7 +28,7 @@
     path: /etc/NetworkManager/conf.d
 
 - name: Verify Canal and Flannel Interface are ignored by NetworkManager
-  when: network_manager.stat.isdir
+  when: network_manager.stat.exists
   ansible.builtin.copy:
     content: |
       [keyfile]

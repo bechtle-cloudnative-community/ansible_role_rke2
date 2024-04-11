@@ -1,6 +1,6 @@
 ---
 - name: Wait til nodes in cluster are ready
-  throttle: 1
+  when: rke2_primary
   register: k8s_ready_state
   kubernetes.core.k8s_info:
     kind: node
@@ -12,5 +12,5 @@
       - 'status=Redy'
   changed_when: false
   until: k8s_ready_state is success
-  retries: 30
+  retries: 60
   delay: 3

@@ -5,8 +5,6 @@
 # For Agent(Worker): agent
 rke2_type: server
 rke2_primary: false
-rke2_node_taint: false
-
 rke2_check_update: true
 
 # Set the RKE2 Version
@@ -15,7 +13,7 @@ rke2_check_update: true
 # - testing
 # - latest
 # - stable
-rke2_channel: latest
+rke2_channel: stable
 
 # RKE2 Install url
 rke2_channel_url: https://get.rke2.io
@@ -53,6 +51,8 @@ rke2_cni:
 
 # rke2_disable_service:
 #   - rke2-ingress-nginx
+# rke2_node_taint:
+#   - "CriticalAddonsOnly=true:NoExecute"
 
 # Path Config file
 rke2_template_config: config.yaml.j2
