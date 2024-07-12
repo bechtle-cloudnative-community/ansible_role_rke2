@@ -1,9 +1,11 @@
 - name: Cordon {{ inventory_hostname }}
   kubernetes.core.k8s_drain:
+    kubeconfig: /etc/rancher/rke2/rke2.yaml
     name: "{{ inventory_hostname }}"
     state: cordon
 
 - name: Drain "{{ inventory_hostname }}"
   kubernetes.core.k8s_drain:
+    kubeconfig: /etc/rancher/rke2/rke2.yaml
     state: drain
     name: "{{ inventory_hostname }}"

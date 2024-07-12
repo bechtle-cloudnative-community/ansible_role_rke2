@@ -2,12 +2,12 @@
 collections:
   - name: ansible.posix
   - name: ansible.utils
-  - name: awx.awx
-  - name: containers.podman
-  # - name: containers.docker
+  # - name: awx.awx
+  # - name: containers.podman
+  # # - name: containers.docker
   - name: kubernetes.core
-  - name: kubevirt.core
-  - name: redhatinsights.insights
+  # - name: kubevirt.core
+  # - name: redhatinsights.insights
   - name: community.general
-    source: https://old-galaxy.ansible.com
+    # source: https://old-galaxy.ansible.com
   - name: community.crypto
