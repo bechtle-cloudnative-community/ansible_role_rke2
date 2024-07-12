@@ -13,17 +13,17 @@
     default_vm_memory: "2Gi"
     default_vm_machine_type: "q35"
     default_vm_cpu: 1
-    default_container_image: "docker://quay.io/kubevirt/fedora-cloud-container-disk-demo"
-    default_storage_size: "5Gi"
+    default_image: "docker://quay.io/kubevirt/fedora-cloud-container-disk-demo"
+    default_storage_size: "10Gi"
     default_ssh_timeout: 300
     default_ssh_delay: 1
     default_pod_ip_retries: 60
     default_pod_ip_delay: 1
     default_ssh_service_type: ClusterIP
     default_termination_grace_perdiod: 0
+    api_service: ansible-rke2-api-svc
 
   tasks:
-
     - name: Create ssh key from Enviroment
       loop: "{{ molecule_yml.platforms }}"
       when: item.ssh_key is defined
@@ -49,21 +49,6 @@
         label: "{{ item.name }}"
       ansible.builtin.include_tasks:
         file: create_vm_task.yml
-
-    # - name: Convert instance config dict to a list
-    #   ansible.builtin.set_fact:
-    #     instance_conf: "{{ instance_config_dict.results | map(attribute='ansible_facts.instance_conf_dict') | list }}"
-
-    # - name: Ssh access test
-    #   loop: "{{ instance_conf | default([]) }}"
-    #   loop_control:
-    #     label: "{{ item.instance }} -> {{ item.address }} timeout={{ item.ssh_timeout | default(default_ssh_timeout) }}"
-    #   when: "item.ssh_test"
-    #   ansible.builtin.wait_for:
-    #     timeout: "{{ item.ssh_timeout | default(default_ssh_timeout) }}"
-    #     port: "{{ item.port | default('22') }}"
-    #     host: "{{ item.address }}"
-    #     delay: "{{ item.ssh_delay | default(default_ssh_delay) }}"
 
     - name: Dump instance config
       ansible.builtin.copy:

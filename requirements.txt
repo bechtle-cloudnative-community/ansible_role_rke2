@@ -1,0 +1,24 @@
+# prepare:
+# see: https://github.com/yaml/pyyaml/issues/601
+cython
+ansible-core==2.15.4
+# ordered:
+#ansible-pylibssh==1.1.0
+ansible-runner==2.3.4
+ansible-lint[lock]==6.21.1
+molecule
+molecule-plugins
+paramiko
+jmespath
+Jinja2
+jsonschema
+kubernetes
+lxml
+openshift
+pyvim
+PyVmomi
+PyYAML
+jmespath
+netaddr
+kubernetes
+passlib

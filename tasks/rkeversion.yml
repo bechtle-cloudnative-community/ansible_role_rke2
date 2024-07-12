@@ -1,5 +1,4 @@
 ---
-
 # get actual channel version
 - name: Get channel list
   ansible.builtin.uri:
@@ -33,6 +32,11 @@
   ansible.builtin.set_fact:
     rke2_latest_version: "{{ rke2_installed_version | list }}"
   when: rke2_version_list.status == 503
+
+- name: Change rke2 installed
+  ansible.builtin.set_fact:
+    rke2_installed: true
+  when: not rke2_installed_version.changed
 
 - name: Change update Status
   ansible.builtin.set_fact:

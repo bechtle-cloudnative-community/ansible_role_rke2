@@ -6,31 +6,64 @@ dependency:
 platforms:
   - name: ansible-rke2-server-1
     namespace: devops
+    molecule_user: molecule
+    memory: "8Gi"
+    storage_size: "10Gi"
+    cpu_cores: 4
+    container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-ubuntu-22.04:latest
+    primary: true
+    ssh_service:
+      type: LoadBalancer
+
+  - name: ansible-rke2-server-2
+    namespace: devops
     memory: "8Gi"
     storage_size: "10Gi"
     cpu_cores: 4
     container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-ubuntu-22.04:latest
     ssh_service:
-      type: ClusterIP
-    custom_manifest:
-      - apiVersion: v1
-        kind: Service
-        metadata:
-          name: ansible-rke2-server-1-api-svc
-          namespace: devops
-        spec:
-          selector:
-            ansible-molecule: ansible-rke2-server-1
-          type: LoadBalancer
-          ports:
-            - protocol: TCP
-              port: 6443
-              targetPort: 6443
-
+      type: LoadBalancer
+    # custom_manifest:
+    #   - apiVersion: v1
+    #     kind: Service
+    #     metadata:
+    #       name: ansible-rke2-server-2-api-svc
+    #       namespace: devops
+    #     spec:
+    #       selector:
+    #         ansible-molecule: ansible-rke2-server-2
+    #       type: LoadBalancer
+    #       ports:
+    #         - protocol: TCP
+    #           port: 6443
+    #           targetPort: 6443
+  - name: ansible-rke2-server-3
+    namespace: devops
+    memory: "8Gi"
+    storage_size: "10Gi"
+    cpu_cores: 4
+    container_image: registry.gitlab-bs.demolab.ch:4567/kubevirt/kubevirt-images/virt-ubuntu-22.04:latest
+    ssh_service:
+      type: LoadBalancer
+    # custom_manifest:
+    #   - apiVersion: v1
+    #     kind: Service
+    #     metadata:
+    #       name: ansible-rke2-server-3-api-svc
+    #       namespace: devops
+    #     spec:
+    #       selector:
+    #         ansible-molecule: ansible-rke2-server-3
+    #       type: LoadBalancer
+    #       ports:
+    #         - protocol: TCP
+    #           port: 6443
+    #           targetPort: 6443
 provisioner:
   name: ansible
   log: true
   inventory:
+
     host_vars:
       ansible-rke2-server-1:
         rke2_type: server

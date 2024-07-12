@@ -1,0 +1,4 @@
+- name: Cordon {{ inventory_hostname }}
+  kubernetes.core.k8s_drain:
+    name: "{{ inventory_hostname }}"
+    state: uncordon

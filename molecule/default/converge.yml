@@ -3,10 +3,9 @@
   hosts: all
   become: true
   remote_user: molecule
+  vars:
+    cluster_fqdn: "ansible-rke2-api-svc.devops.svc.cluster.local"
   tasks:
-
     - name: "Include bechtle.rke2"
-      vars:
-        rke2_cluster_fqdn: "{{ inventory_hostname }}.devops.svc.cluster.local"
       ansible.builtin.include_role:
         name: "bechtle.rke2"

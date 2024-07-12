@@ -1,32 +1,5 @@
 ---
 # This task file is itended to solve Requirements
-- name: Install and load kubctl package
-  ansible.builtin.file:
-    path: /etc/apt/keyrings/kubernetes-archive-keyring.gpg
-    state: absent
-
-- name: Load sources
-  ansible.builtin.apt_repository:
-    repo: deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
-    state: absent
-
-- name: Update Cache
-  register: apt_cache_update
-  changed_when: apt_cache_update is failed
-  ansible.builtin.apt:
-    update_cache: true
-
-# - name: Add repo using key from URL
-#   ansible.builtin.deb822_repository:
-#     state: absent
-#     name: kubectl
-#     types: deb
-#     uris: https://apt.kubernetes.io/
-#     suites: kubernetes-xenial
-#     components: main
-#     architectures: amd64
-#     signed_by: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-
 - name: Update Cache
   register: apt_cache_update
   changed_when: apt_cache_update is failed
@@ -37,6 +10,17 @@
   ansible.builtin.apt:
     name: firewalld
     state: absent
+
+- name: Install and load kubctl package
+  ansible.builtin.apt_key:
+    url: https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key
+    state: present
+
+- name: Load sources
+  ansible.builtin.apt_repository:
+    repo: deb https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
+    filename: kubernetes.list
+    state: present
 
 - name: Install iptables
   ansible.builtin.apt:
@@ -50,7 +34,7 @@
       - python3-kubernetes
     state: present
 
-# - name: Install Kubectl
-#   ansible.builtin.apt:
-#     name: kubectl
-#     state: present
+- name: Install Kubectl
+  ansible.builtin.apt:
+    name: kubectl
+    state: present

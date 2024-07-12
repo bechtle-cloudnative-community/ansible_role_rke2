@@ -1,0 +1,32 @@
+---
+- name: Run RKE2 Install/Update block
+  throttle: 1
+  block:
+    # Include of token.yml for Checking for token file
+    - name: Generate token - RKE2 Server
+      ansible.builtin.include_tasks:
+        file: token.yml
+
+    # Include config yml to Template config.yml for rke2
+    - name: Template Config File - RKE2 Server
+      ansible.builtin.include_tasks:
+        file: config.yml
+
+    - name: Drein node
+      when: rke2_installed
+      ansible.builtin.include_tasks:
+        file: rke2_drain.yml
+
+    # Includes of rke2.yml for Update and Install RKE2
+    - name: Install/Update - RKE2 Server
+      ansible.builtin.include_tasks:
+        file: rke2.yml
+
+    - name: Ensure Cluster is Ready
+      ansible.builtin.include_tasks:
+        file: k8s_check.yml
+
+    - name: Drein node
+      when: rke2_installed
+      ansible.builtin.include_tasks:
+        file: rke2_ucordon.yml

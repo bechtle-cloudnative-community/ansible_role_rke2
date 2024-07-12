@@ -15,6 +15,12 @@
       loop_control:
         label: "{{ item.name }}"
 
+    - name: Ensure API Cluster service is created
+      kubernetes.core.k8s_service:
+        name: ansible-rke2-api-svc
+        namespace: devops
+        state: absent
+
     # - name: Delete cloud init
     #   kubernetes.core.k8s:
     #     state: absent
