@@ -9,5 +9,8 @@
     kubeconfig: /etc/rancher/rke2/rke2.yaml
     delete_options:
       ignore_daemonsets: true
+      delete_emptydir_data: true
+      terminate_grace_period: 10
+      wait_timeout: 15
     state: drain
     name: "{{ inventory_hostname }}"

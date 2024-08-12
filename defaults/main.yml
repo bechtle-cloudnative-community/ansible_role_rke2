@@ -46,13 +46,12 @@ rke2_cluster_cidr: 10.50.0.0/16
 rke2_service_cidr: 10.51.0.0/16
 
 rke2_cni:
-  - multus
   - canal
 
 # rke2_disable_service:
 #   - rke2-ingress-nginx
 
-rke2_node_taint: omit
+# rke2_node_taint:
   # - "CriticalAddonsOnly=true:NoExecute"
 
 # Path Config file
