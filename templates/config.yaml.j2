@@ -22,6 +22,6 @@ bind-address: {{ rke2_bind_address }}
 node-taint: {{ rke2_node_taint}}
 {% endif %}
 {% if rke2_etcd_metrics is defined %}
-etcd-expose-metrics: {{ rke2_metrics }}
+etcd-expose-metrics: {{ rke2_etcd_metrics }}
 {% endif %}
 {% endif %}
