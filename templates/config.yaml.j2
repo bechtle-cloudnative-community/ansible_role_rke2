@@ -1,4 +1,8 @@
 # {{ ansible_managed }}
+{% if ansible_selinux.status == 'enabled' %}
+# enable selinux
+selinux: true
+{% endif %}
 # Host to Connect and Auth Token
 {% if not rke2_primary %}
 server: https://{{ rke2_cluster_fqdn }}:9345

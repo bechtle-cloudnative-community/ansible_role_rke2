@@ -6,3 +6,8 @@
     name: "rke2-{{ rke2_type }}"
     state: restarted
     enabled: true
+
+# handlers file for rke2
+- name: RebootNode
+  ansible.builtin.reboot:
+    msg: System going to be Rebooted

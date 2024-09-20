@@ -5,39 +5,68 @@
     name: firewalld
     state: absent
 
-- name: Ensure YUM/DNF repository is added
-  ansible.builtin.yum_repository:
-    name: kubernetes
-    description: Kubernetes
-    file: /etc/yum.repos.d/kubernetes.repo
-    baseurl: https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
-    enabled: true
-    gpgcheck: true
-    gpgkey: https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
-    mode: '0644'
-    owner: root
-    group: root
+- name: Ensure needed packages installed when airgap is false
+  when: not rke2_airgap_install
+  block:
+    - name: Ensure YUM/DNF repository is added
+      ansible.builtin.yum_repository:
+        name: kubernetes
+        description: Kubernetes
+        file: /etc/yum.repos.d/kubernetes.repo
+        baseurl: https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+        enabled: true
+        gpgcheck: true
+        gpgkey: https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
+        mode: '0644'
+        owner: root
+        group: root
 
-- name: Enable a RHSM repository
-  community.general.rhsm_repository:
-    name: codeready-builder-for-rhel-9-x86_64-rpms
+    # - name: Enable a RHSM repository
+    #   community.general.rhsm_repository:
+    #     name: codeready-builder-for-rhel-9-x86_64-rpms
 
 - name: Install iptables
   ansible.builtin.dnf:
+    state: present
     name:
       - iptables
       - ca-certificates
       - curl
       - wget
-      - python3-pip
-    state: present
+      - python3-kubernetes
 
-- name: Ensure kubernetes lib is installed
-  ansible.builtin.pip:
-    name:
-      - kubernetes
+- name: Block install SELinux airgap
+  when: ansible_selinux.status == "enabled" and rke2_airgap_install
+  block:
+    - name: Ensure rke2 SELinux is copied
+      ansible.builtin.copy:
+        src: rke2-selinux-0.18-1.el9.noarch.rpm
+        dest: /tmp/
+        mode: "0644"
+        owner: root
+        group: root
 
-- name: Install Kubectl
-  ansible.builtin.dnf:
-    name: kubectl
-    state: present
+    - name: Ensure container-selinux is installed
+      notify:
+        - RebootNode
+      ansible.builtin.dnf:
+        state: present
+        name:
+          - container-selinux
+
+    - name: Ensure SELinux is instelled
+      register: enable_selinux
+      notify:
+        - RebootNode
+      ansible.builtin.dnf:
+        state: present
+        name: /tmp/rke2-selinux-0.18-1.el9.noarch.rpm
+        disable_gpg_check: true
+
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers
+
+    # # - name: Ensure kubernetes lib is installed
+    # #   ansible.builtin.pip:
+    # #     name:
+    # #       - kubernetes

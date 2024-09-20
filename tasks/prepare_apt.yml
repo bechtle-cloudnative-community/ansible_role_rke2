@@ -11,16 +11,24 @@
     name: firewalld
     state: absent
 
-- name: Install and load kubctl package
-  ansible.builtin.apt_key:
-    url: https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key
-    state: present
+- name: Ensure needed packages installed when airgap is false
+  when: not rke2_airgap_install
+  block:
+    - name: Install and load kubctl package
+      ansible.builtin.apt_key:
+        url: https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key
+        state: present
 
-- name: Load sources
-  ansible.builtin.apt_repository:
-    repo: deb https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
-    filename: kubernetes.list
-    state: present
+    - name: Load sources
+      ansible.builtin.apt_repository:
+        repo: deb https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
+        filename: kubernetes.list
+        state: present
+
+    - name: Install Kubectl
+      ansible.builtin.apt:
+        name: kubectl
+        state: present
 
 - name: Install iptables
   ansible.builtin.apt:
@@ -31,10 +39,4 @@
       - curl
       - wget
       - pgpgpg
-      - python3-kubernetes
-    state: present
-
-- name: Install Kubectl
-  ansible.builtin.apt:
-    name: kubectl
     state: present

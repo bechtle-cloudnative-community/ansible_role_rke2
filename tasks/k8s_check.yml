@@ -1,15 +1,34 @@
 ---
+- name: Fetch file from primary node
+  when: rke2_primary
+  ansible.builtin.fetch:
+    src: "{{ rke2_kubeconfig }}"
+    dest: "{{ playbook_dir }}/"
+    flat: true
+
+- name: Ensure locahost is replaced
+  connection: local
+  become: false
+  ansible.builtin.replace:
+    path: "{{ playbook_dir }}/rke2.yaml"
+    regexp: '(.*)127.0.0.1(.*)'
+    replace: '\1{{ rke2_cluster_fqdn }}\2'
+    mode: "0600"
+
+
 - name: Wait til nodes in cluster are ready
   throttle: 1
   register: k8s_ready_state
+  connection: local
+  become: false
   kubernetes.core.k8s_info:
     kind: node
     wait: true
-    kubeconfig: /etc/rancher/rke2/rke2.yaml
+    kubeconfig: "{{ playbook_dir }}/rke2.yaml"
     label_selectors:
       - 'kubernetes.io/hostname={{ inventory_hostname }}'
     field_selectors:
-      - 'status=Redy'
+      - 'status=Ready'
   changed_when: false
   until: k8s_ready_state is success
   retries: 30

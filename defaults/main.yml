@@ -7,19 +7,25 @@ rke2_type: server
 rke2_primary: false
 rke2_check_update: true
 
+# For airgap install set this to true
+rke2_airgap_install: false
+
+# Path to copy artifacts
+rke2_artifacts_path: /tmp/rke2-aritifacts
+
 # Set the RKE2 Version
 # default is stable. for more Information:
 # https://docs.rke2.io/install/configuration
 # - testing
 # - latest
 # - stable
-rke2_channel: latest
+rke2_channel: stable
 
 # RKE2 Install url
 rke2_channel_url: https://get.rke2.io
 
 # RKE2 install Shell Script path and name
-rke2_install_script: /usr/local/bin/rke2_install.sh
+rke2_install_script: /usr/local/bin/install.sh
 
 # Set RKE2
 # Set of the most commen values for rke2 config option
@@ -34,7 +40,7 @@ rke2_bind_address: 0.0.0.0
 #  - A layer 4 (TCP) load balancer
 #  - Round-robin DNS1
 #  - Virtual or elastic IP addresses
-rke2_cluster_fqdn: "{{ cluster_fqdn | default('ansible-rke2-server-1') }}"
+rke2_cluster_fqdn: "{{ inventory_hostname }}"
 
 # Subject alternative names for the Server and Cluster API to accept
 # FQDN or IPv4 of the Server Nodes
@@ -60,5 +66,10 @@ rke2_etcd_metrics: true
 rke2_template_config: config.yaml.j2
 rke2_config_path: /etc/rancher/rke2
 rke2_config_file: "{{ rke2_config_path }}/config.yaml"
-rke2_token_file: /var/lib/rancher/rke2/server/node-token
+rke2_kubeconfig: "{{ rke2_config_path }}/rke2.yaml"
+rke2_data_dir: /var/lib/rancher/rke2
+rke2_token_file: "{{ rke2_data_dir }}/server/node-token"
 
+# Extra values if images/containerd should be placed on diffre folder/mountpoint
+rke2_extra_containerd_path: "{{ undef() }}"
+rke2_extra_image_path: "{{ undef() }}"

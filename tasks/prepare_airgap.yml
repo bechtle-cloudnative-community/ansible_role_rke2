@@ -1,0 +1,40 @@
+---
+# create artifacts directory
+- name: Ensure directory for artifacts exists
+  ansible.builtin.file:
+    name: "{{ rke2_artifacts_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+# copy airgap image archive
+- name: Ensure airgap archives are copied
+  vars:
+    rke2_airgap_archives:
+      - rke2-images.linux-amd64.tar.gz
+      - rke2-images-calico.linux-amd64.tar.gz
+      - rke2.linux-amd64.tar.gz
+      - sha256sum-amd64.txt
+  loop: "{{ rke2_airgap_archives }}"
+  register: airgap_archives
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ rke2_artifacts_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+
+# copy airgap rke2 binary
+- name: Ensure airgap binary are copied
+  vars:
+    rke2_airgap_binary:
+      - install.sh
+      - kubectl
+  loop: "{{ rke2_airgap_binary }}"
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /usr/local/sbin/
+    owner: root
+    group: root
+    mode: "0755"

@@ -5,8 +5,15 @@
   ansible.builtin.include_tasks:
     file: prepare.yml
 
+# Include of preapre_airgap if airgap install is true
+- name: Solve Requirements throupth prepare.yml
+  when: rke2_airgap_install
+  ansible.builtin.include_tasks:
+    file: prepare_airgap.yml
+
 # Include rkeversion.yml for checking for new Version
 - name: Solve Requirements throupth prepare.yml
+  when: not rke2_airgap_install
   ansible.builtin.include_tasks:
     file: rkeversion.yml
 

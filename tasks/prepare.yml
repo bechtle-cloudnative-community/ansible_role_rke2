@@ -54,11 +54,11 @@
     group: root
     mode: "0644"
 
-# Solve issue https://docs.rke2.io/known_issues#canal-and-ip-exhaustion
-# Install iptables
-- name: Ensure task for issue canal-and-ip-exhausion is included
-  ansible.builtin.include_tasks:
-    file: "prepare_{{ ansible_pkg_mgr }}.yml"
+# # Solve issue https://docs.rke2.io/known_issues#canal-and-ip-exhaustion
+# # Install iptables
+# - name: Ensure task for issue canal-and-ip-exhausion is included
+#   ansible.builtin.include_tasks:
+#     file: "prepare_{{ ansible_pkg_mgr }}.yml"
 
 # Create Directory for Config
 - name: Create conifuguration Directory
@@ -68,3 +68,32 @@
     owner: root
     group: root
     state: directory
+
+# - name: Block Continerd
+#   when: rke2_extra_container_path is defined
+#   block:
+#     - name: Ensure Directory Data Dir exists
+#       ansible.builtin.file:
+#         path: "{{ rke2_dest_containderd }}"
+#         state: directory
+#         mode: "0755"
+#         owner: root
+#         group: root
+
+#     - name: Ensure Directory for containerd exists
+#       loop: "{{ rke2_containerd_subpath }}"
+#       ansible.builtin.file:
+#         path: "{{ item }}"
+#         state: directory
+#         mode: "0755"
+#         owner: root
+#         group: root
+
+#     - name: Ensure Directory for containerd exists
+#       loop: "{{ rke2_containerd_subpath }}"
+#       ansible.builtin.file:
+#         src: "{{ item }}"
+#         dest: "{{ rke2_dest_containderd }}/{{ item | basename }}"
+#         state: link
+#         owner: root
+#         group: root

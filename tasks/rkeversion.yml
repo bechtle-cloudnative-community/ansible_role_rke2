@@ -1,5 +1,6 @@
 ---
 # get actual channel version
+# Block to get Version
 - name: Get channel list
   ansible.builtin.uri:
     url: https://update.rke2.io/v1-release/channels

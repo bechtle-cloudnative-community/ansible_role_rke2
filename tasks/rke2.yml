@@ -1,21 +1,39 @@
 # Download the install Script
-- name: Download RKE2 install.sh
-  ansible.builtin.get_url:
-    url: "{{ rke2_channel_url }}"
-    dest: "{{ rke2_install_script }}"
-    mode: "0755"
-    owner: root
-    group: root
-  when: rke2_update
+- name: Run block when not airgap install
+  when: not rke2_airgap_install
+  block:
+    - name: Download RKE2 install.sh
+      ansible.builtin.get_url:
+        url: "{{ rke2_channel_url }}"
+        dest: "{{ rke2_install_script }}"
+        mode: "0755"
+        owner: root
+        group: root
+      when: rke2_update
+
+    # Install Script for Server
+    - name: Execute install Script
+      register: install_sh_out
+      environment:
+        INSTALL_RKE2_TYPE: "{{ rke2_type }}"
+        INSTALL_RKE2_CHANNEL: "{{ rke2_channel }}"
+      when: rke2_update
+      changed_when: rke2_update
+      notify:
+        - "Restart rke2"
+      ansible.builtin.command:
+        cmd: "{{ rke2_install_script }}"
 
 # Install Script for Server
 - name: Execute install Script
   register: install_sh_out
   environment:
     INSTALL_RKE2_TYPE: "{{ rke2_type }}"
+    INSTALL_RKE2_ARTIFACT_PATH: "{{ rke2_artifacts_path }}"
     INSTALL_RKE2_CHANNEL: "{{ rke2_channel }}"
-  when: rke2_update
-  changed_when: rke2_update
+    INSTALL_RKE2_METHOD: tar
+  when: rke2_airgap_install
+  changed_when: rke2_airgap_install
   notify:
     - "Restart rke2"
   ansible.builtin.command:
