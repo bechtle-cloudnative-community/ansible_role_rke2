@@ -1,5 +1,7 @@
 - name: Cordon {{ inventory_hostname }}
+  connection: local
+  delegate_to: localhost
   kubernetes.core.k8s_drain:
-    kubeconfig: /etc/rancher/rke2/rke2.yaml
+    kubeconfig: "{{ rke2_kubeconfig | default('~/.kube/config') }}"
     name: "{{ inventory_hostname }}"
     state: uncordon

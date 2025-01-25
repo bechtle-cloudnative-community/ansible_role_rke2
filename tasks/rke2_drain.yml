@@ -1,16 +1,14 @@
-- name: Cordon {{ inventory_hostname }}
+- name: Drein node
+  connection: local
+  delegate_to: localhost
   kubernetes.core.k8s_drain:
-    kubeconfig: /etc/rancher/rke2/rke2.yaml
     name: "{{ inventory_hostname }}"
-    state: cordon
-
-- name: Drain "{{ inventory_hostname }}"
-  kubernetes.core.k8s_drain:
-    kubeconfig: /etc/rancher/rke2/rke2.yaml
+    kubeconfig: "{{ rke2_kubeconfig | default('~/.kube/config') }}"
+    state: drain
+    pod_selectors:
+      - 'app!=csi-attacher'
+      - 'app!=csi-provisioner'
+      - 'longhorn.io/component!=instance-manager'
     delete_options:
       ignore_daemonsets: true
       delete_emptydir_data: true
-      terminate_grace_period: 10
-      wait_timeout: 15
-    state: drain
-    name: "{{ inventory_hostname }}"

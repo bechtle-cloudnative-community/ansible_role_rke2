@@ -18,13 +18,14 @@
 
 - name: Wait til nodes in cluster are ready
   throttle: 1
+  connection: local
   register: k8s_ready_state
   connection: local
   become: false
   kubernetes.core.k8s_info:
     kind: node
     wait: true
-    kubeconfig: "{{ playbook_dir }}/rke2.yaml"
+    kubeconfig: "{{ rke2_kubeconfig }} | default (~/.kube/config)"
     label_selectors:
       - 'kubernetes.io/hostname={{ inventory_hostname }}'
     field_selectors:
