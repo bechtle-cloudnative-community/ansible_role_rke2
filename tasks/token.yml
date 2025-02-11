@@ -2,8 +2,10 @@
 # Master.yml
 # Check Conf file exists
 # Create Directory for Config
+
 - name: Set primary Server as fact
   loop: "{{ play_hosts_all }}"
+  delegate_to: "{{ item }}"
   when: rke2_primary is defined and rke2_primary
   ansible.builtin.set_fact:
     primary_node: "{{ item }}"
