@@ -20,17 +20,20 @@
 # Manage RKE2 on Primary Server node (Master)
 - name: Manage RKE2 Server primary
   when: '"server" in rke2_type and rke2_primary'
+  throttle: 1
   ansible.builtin.include_tasks:
     file: k8s_tasks.yml
 
 # Manage RKE2 on Primary Server node (Secondary)
 - name: Manage RKE2 Server secondary
+  throttle: 1
   when: '"server" in rke2_type and not rke2_primary'
   ansible.builtin.include_tasks:
     file: k8s_tasks.yml
 
 # Manage RKE2 on Agent node (Worker)
 - name: Manage RKE2 Agent
+  throttle: 1
   when: '"agent" in rke2_type'
   ansible.builtin.include_tasks:
     file: k8s_tasks.yml
