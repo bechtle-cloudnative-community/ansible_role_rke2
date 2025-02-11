@@ -54,7 +54,7 @@ rke2_service_cidr: 10.51.0.0/16
 rke2_cni:
   - canal
 
-rke2_cp_metrics: true
+rke2_metrics: true
 
 # rke2_disable_service:
 #   - rke2-ingress-nginx
