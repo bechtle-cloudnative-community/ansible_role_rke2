@@ -8,6 +8,10 @@ selinux: true
 server: https://{{ rke2_cluster_fqdn }}:9345
 {% endif %}
 token: {{ rke2_token }}
+{% if rke2_metrics is true %}
+kube-proxy-arg:
+  - --metrics-bind-address=0.0.0.0:10249
+{% endif %}
 {% if rke2_type == "server" %}
 # server Configuration Part
 tls-san: {{ rke2_tls_san }}
@@ -25,7 +29,13 @@ bind-address: {{ rke2_bind_address }}
 {% if rke2_node_taint is defined %}
 node-taint: {{ rke2_node_taint}}
 {% endif %}
-{% if rke2_etcd_metrics is defined %}
-etcd-expose-metrics: {{ rke2_etcd_metrics }}
+{% if rke2_metrics is true %}
+etcd-expose-metrics: true
+kube-scheduler-arg:
+  - --bind-address 0.0.0.0
+kube-controller-manager-arg:
+  - --bind-address 0.0.0.0
+kube-cloud-controller-manager-arg:
+  - --bind-address 0.0.0.0
 {% endif %}
 {% endif %}

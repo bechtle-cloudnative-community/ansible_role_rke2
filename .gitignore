@@ -6,3 +6,4 @@ archive
 .vscode
 ansible_rke2_ee/context
 virctl
+collections

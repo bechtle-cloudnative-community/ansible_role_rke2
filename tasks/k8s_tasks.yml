@@ -1,6 +1,5 @@
 ---
 - name: Run RKE2 Install/Update block
-  throttle: 1
   block:
     # Include of token.yml for Checking for token file
     - name: Generate token - RKE2 Server

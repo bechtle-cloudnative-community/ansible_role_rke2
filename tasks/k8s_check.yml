@@ -17,10 +17,8 @@
 
 
 - name: Wait til nodes in cluster are ready
-  throttle: 1
   connection: local
   register: k8s_ready_state
-  connection: local
   become: false
   kubernetes.core.k8s_info:
     kind: node
