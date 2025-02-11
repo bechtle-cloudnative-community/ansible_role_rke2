@@ -21,6 +21,9 @@
       ansible.builtin.include_tasks:
         file: rke2.yml
 
+    - name: Force restart rke2
+      ansible.builtin.meta: flush_handlers
+
     - name: Ensure Cluster is Ready
       ansible.builtin.include_tasks:
         file: k8s_check.yml
