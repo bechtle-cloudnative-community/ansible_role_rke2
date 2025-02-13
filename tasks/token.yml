@@ -6,7 +6,7 @@
 - name: Set primary Server as fact
   loop: "{{ anbsible_play_hosts_all }}"
   delegate_to: "{{ item }}"
-  when: rke2_primary
+  when: hostvars[item].rke2_primary
   ansible.builtin.set_fact:
     primary_node: "{{ item }}"
 
