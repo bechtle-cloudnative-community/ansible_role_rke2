@@ -4,7 +4,7 @@
 # Create Directory for Config
 
 - name: Set primary Server as fact
-  loop: "{{ anbsible_play_hosts_all }}"
+  loop: "{{ ansible_play_hosts_all }}"
   delegate_to: "{{ item }}"
   when: hostvars[item].rke2_primary
   ansible.builtin.set_fact:
