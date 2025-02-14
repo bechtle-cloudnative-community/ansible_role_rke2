@@ -3,23 +3,16 @@
 # Check Conf file exists
 # Create Directory for Config
 
-- name: Set primary Server as fact
-  loop: "{{ ansible_play_hosts_all }}"
-  delegate_to: "{{ item }}"
-  when: hostvars[item].rke2_primary is defined and hostvars[item].rke2_primary
-  ansible.builtin.set_fact:
-    primary_node: "{{ item }}"
-
 # RKE2 Check Token file exists
 - name: Check RKE2 Token File
   register: token_stat
-  delegate_to: "{{ primary_node }}"
+  delegate_to: "{{ rke2_primary_node }}"
   ansible.builtin.stat:
     path: "{{ rke2_token_file }}"
 
 # RKE2 Token auslesen
 - name: Read RKE2 Token File
-  delegate_to: "{{ primary_node }}"
+  delegate_to: "{{ rke2_primary_node }}"
   when: token_stat.exists
   register: token_b64
   ansible.builtin.slurp:
