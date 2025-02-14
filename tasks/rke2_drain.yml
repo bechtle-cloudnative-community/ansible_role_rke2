@@ -11,7 +11,7 @@
       - 'app!=csi-attacher'
       - 'app!=csi-provisioner'
       - 'longhorn.io/component!=instance-manager'
-      - 'app.kubernetes.io/part-of=ingress-nginx'
+      - 'app.kubernetes.io/name=ingress-nginx'
     delete_options:
       ignore_daemonsets: true
       delete_emptydir_data: true
