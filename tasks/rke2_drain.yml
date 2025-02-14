@@ -2,9 +2,10 @@
   connection: local
   vars:
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
+  when: rke2_installed
   kubernetes.core.k8s_drain:
     name: "{{ inventory_hostname }}"
-    kubeconfig: "{{ rke2_kubeconfig | default('~/.kube/config') }}"
+    kubeconfig: "{{ playbook_dir }}/rke2.yaml"
     state: drain
     pod_selectors:
       - 'app!=csi-attacher'
