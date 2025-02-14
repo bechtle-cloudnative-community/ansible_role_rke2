@@ -4,7 +4,7 @@
   kubernetes.core.k8s_info:
     kind: node
     wait: true
-    kubeconfig: "{{ playbook_dir }}/rke2.yaml"
+    kubeconfig: "{{ rke2_kubeconfig }}"
     label_selectors:
       - 'kubernetes.io/hostname={{ inventory_hostname }}'
     field_selectors:
