@@ -1,27 +1,6 @@
 ---
-- name: Fetch file from primary node
-  when: rke2_primary
-  ansible.builtin.fetch:
-    src: "{{ rke2_kubeconfig }}"
-    dest: "{{ playbook_dir }}/"
-    flat: true
-
-- name: Ensure locahost is replaced
-  connection: local
-  become: false
-  delegate_to: locahost
-  ansible.builtin.replace:
-    path: "{{ playbook_dir }}/rke2.yaml"
-    regexp: '(.*)127.0.0.1(.*)'
-    replace: '\1{{ rke2_cluster_fqdn }}\2'
-    mode: "0600"
-
-
 - name: Wait til nodes in cluster are ready
-  connection: local
-  register: k8s_ready_state
-  become: false
-  delegate_to: locahost
+  delegate_to: "{{ rke2_primary_node }}"
   kubernetes.core.k8s_info:
     kind: node
     wait: true
