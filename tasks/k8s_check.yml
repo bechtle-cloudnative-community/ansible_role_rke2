@@ -6,29 +6,33 @@
     dest: "{{ playbook_dir }}/"
     flat: true
 
-- name: Ensure locahost is replaced
-  connection: local
-  become: false
-  ansible.builtin.replace:
-    path: "{{ playbook_dir }}/rke2.yaml"
-    regexp: '(.*)127.0.0.1(.*)'
-    replace: '\1{{ rke2_cluster_fqdn }}\2'
-    mode: "0600"
+- name: Blcok Test Ready state
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+  block:
+    - name: Ensure locahost is replaced
+      connection: local
+      become: false
+      ansible.builtin.replace:
+        path: "{{ playbook_dir }}/rke2.yaml"
+        regexp: '(.*)127.0.0.1(.*)'
+        replace: '\1{{ rke2_cluster_fqdn }}\2'
+        mode: "0600"
 
 
-- name: Wait til nodes in cluster are ready
-  connection: local
-  register: k8s_ready_state
-  become: false
-  kubernetes.core.k8s_info:
-    kind: node
-    wait: true
-    kubeconfig: "{{ playbook_dir }}/rke2.yaml"
-    label_selectors:
-      - 'kubernetes.io/hostname={{ inventory_hostname }}'
-    field_selectors:
-      - 'status=Ready'
-  changed_when: false
-  until: k8s_ready_state is success
-  retries: 30
-  delay: 3
+    - name: Wait til nodes in cluster are ready
+      connection: local
+      register: k8s_ready_state
+      become: false
+      kubernetes.core.k8s_info:
+        kind: node
+        wait: true
+        kubeconfig: "{{ playbook_dir }}/rke2.yaml"
+        label_selectors:
+          - 'kubernetes.io/hostname={{ inventory_hostname }}'
+        field_selectors:
+          - 'status=Ready'
+      changed_when: false
+      until: k8s_ready_state is success
+      retries: 30
+      delay: 3
