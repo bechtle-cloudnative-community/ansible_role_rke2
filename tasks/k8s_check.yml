@@ -1,5 +1,6 @@
 ---
 - name: Wait til nodes in cluster are ready
+  become: true
   delegate_to: "{{ rke2_primary_node }}"
   kubernetes.core.k8s_info:
     kind: node
