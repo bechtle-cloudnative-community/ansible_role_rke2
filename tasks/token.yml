@@ -20,15 +20,9 @@
 
 # Read Token value to facts
 - name: Set token to facts for all
-  when: token_b64.content is defined and not rke2_primary
+  when: token_b64.content is defined
   ansible.builtin.set_fact:
     rke2_token: "{{ token_b64.content | b64decode }}"
-
-# Read Token value to facts
-- name: Set token to facts for primary
-  ansible.builtin.set_fact:
-    rke2_token: "{{ rke2_token | split(':') | last }}"
-  when: rke2_primary and rke2_token is defined
 
   # Read Token value to facts
 - name: Set token to facts
