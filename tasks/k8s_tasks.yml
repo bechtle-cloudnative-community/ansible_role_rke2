@@ -12,12 +12,13 @@
         file: config.yml
 
     - name: Uncordon node
-      when: rke2_installed
+      when: rke2_installed and rke2_update
       ansible.builtin.include_tasks:
         file: rke2_drain.yml
 
     # Includes of rke2.yml for Update and Install RKE2
     - name: Install/Update - RKE2 Server
+      when: not rke2_installed or rke2_update
       ansible.builtin.include_tasks:
         file: rke2.yml
 
@@ -29,6 +30,5 @@
         file: k8s_check.yml
 
     - name: Uncordon node
-      when: rke2_installed
       ansible.builtin.include_tasks:
         file: rke2_uncordon.yml

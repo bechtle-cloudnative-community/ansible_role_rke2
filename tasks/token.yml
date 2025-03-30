@@ -2,11 +2,10 @@
 # Master.yml
 # Check Conf file exists
 # Create Directory for Config
-
 # RKE2 Check Token file exists
 - name: Check RKE2 Token File
-  register: token_stat
   delegate_to: "{{ rke2_primary_node }}"
+  register: token_stat
   ansible.builtin.stat:
     path: "{{ rke2_token_file }}"
 
@@ -28,4 +27,4 @@
 - name: Set token to facts
   ansible.builtin.set_fact:
     rke2_token: "{{ lookup('community.general.random_string', special=false, length=32) }}\n"
-  when: rke2_primary and rke2_token is undefined
+  when: rke2_token is undefined

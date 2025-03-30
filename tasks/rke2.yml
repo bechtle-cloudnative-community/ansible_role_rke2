@@ -9,7 +9,6 @@
         mode: "0755"
         owner: root
         group: root
-      when: rke2_update
 
     # Install Script for Server
     - name: Execute install Script
@@ -17,7 +16,6 @@
       environment:
         INSTALL_RKE2_TYPE: "{{ rke2_type }}"
         INSTALL_RKE2_CHANNEL: "{{ rke2_channel }}"
-      when: rke2_update
       changed_when: rke2_update
       notify:
         - "Restart rke2"

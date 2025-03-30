@@ -1,6 +1,7 @@
 ---
 # vars file for rke2
 rke2_update: false
+rke2_installed: false
 
 # only needed when rke2_extra_container path is defined
 rke2_dest_containderd: "{{ rke2_data_dir }}/agent"
