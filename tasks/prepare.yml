@@ -47,8 +47,6 @@
     content: |
       net.ipv4.conf.all.forwarding=1
       net.ipv6.conf.all.forwarding=1
-      net.ipv4.conf.default.rp_filter=1
-      net.ipv4.conf.all.rp_filter=1
     dest: /etc/sysctl.d/90-rke2.conf
     owner: root
     group: root
