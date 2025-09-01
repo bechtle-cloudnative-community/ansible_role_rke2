@@ -10,8 +10,9 @@
   vars:
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
   block:
-    - name: Ensure locahost is replaced
+    - name: Ensure localhost is replaced
       connection: local
+      delegate_to: localhost
       become: false
       ansible.builtin.replace:
         path: "{{ playbook_dir }}/rke2.yaml"
@@ -22,6 +23,7 @@
 
     - name: Wait til nodes in cluster are ready
       connection: local
+      delegate_to: localhost
       register: k8s_ready_state
       become: false
       kubernetes.core.k8s_info:
