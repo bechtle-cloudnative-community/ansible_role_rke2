@@ -1,5 +1,6 @@
-- name: Drein node
+- name: Drain node
   connection: local
+  delegate_to: localhost
   vars:
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
   when: rke2_installed
