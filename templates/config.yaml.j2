@@ -32,10 +32,12 @@ node-taint: {{ rke2_node_taint}}
 {% if rke2_metrics is true %}
 etcd-expose-metrics: true
 kube-scheduler-arg:
-  - --bind-address=0.0.0.0
+  - --bind-address={{ rke2_bind_address }}
 kube-controller-manager-arg:
-  - --bind-address=0.0.0.0
+  - --bind-address={{ rke2_bind_address }}
 kube-cloud-controller-manager-arg:
-  - --bind-address=0.0.0.0
+  - --bind-address={{ rke2_bind_address }}
+kube-proxy-arg:
+  - --metrics-bind-address={{ rke2_bind_address }}:10249
 {% endif %}
 {% endif %}
