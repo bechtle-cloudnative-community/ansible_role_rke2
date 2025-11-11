@@ -27,7 +27,10 @@ cni: {{ rke2_cni }}
 bind-address: {{ rke2_bind_address }}
 {% endif %}
 {% if rke2_node_taint is defined %}
-node-taint: {{ rke2_node_taint}}
+node-taint: 
+{% for node_taint in rke2_node_taint %}
+  - "{{ node_taint }}"
+{% endfor %}
 {% endif %}
 {% if rke2_metrics is true %}
 etcd-expose-metrics: true
