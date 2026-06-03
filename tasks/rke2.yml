@@ -23,7 +23,7 @@
         cmd: "{{ rke2_install_script }}"
 
 # Install Script for Server
-- name: Execute install Script
+- name: Execute AirGap install Script
   register: install_sh_out
   environment:
     INSTALL_RKE2_TYPE: "{{ rke2_type }}"
