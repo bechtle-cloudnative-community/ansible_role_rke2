@@ -12,8 +12,14 @@
 - name: Populate service facts
   ansible.builtin.service_facts:
 
+- name: Set VAR for services facts
+  ansible.builtin.set_fact:
+    systemd_svc: ansible_facts.services
+
 - name: Ensure Firewalld is stopped
-  when: '"firewalld.service" in ansible_facts.services '
+  when:
+    - not systemd_svc['firewalld.service'] == "not-found"
+    - '"firewalld.service" in systemd_svc'
   ansible.builtin.systemd:
     name: firewalld
     state: stopped
