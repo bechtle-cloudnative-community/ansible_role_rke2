@@ -18,7 +18,7 @@
 
 - name: Ensure Firewalld is stopped
   when:
-    - not systemd_svc['firewalld.service'] == "not-found"
+    - systemd_svc['firewalld.service'] != "not-found"
     - '"firewalld.service" in systemd_svc'
   ansible.builtin.systemd:
     name: firewalld
