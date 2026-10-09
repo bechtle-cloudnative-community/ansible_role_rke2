@@ -21,7 +21,7 @@
 
 - name: Set version as fact
   ansible.builtin.set_fact:
-    rke2_latest_version: "{{ rke2_channel_redirect.location | basename | urldecode }}"
+    rke2_latest_version: "{{ rke2_channel_redirect.location | basename | regex_replace('%2[Bb]', '+') }}"
   when: rke2_channel_redirect.status == 302
 
 - name: Change rke2 installed
@@ -35,11 +35,15 @@
 - name: Change update Status
   ansible.builtin.set_fact:
     rke2_update: true
+  vars:
+    rke2_version_regex: 'v?(\d+)\.(\d+)\.(\d+)[+]rke2r(\d+)'
+    rke2_current_cmp: "{{ rke2_current_version | regex_search(rke2_version_regex, '\\1', '\\2', '\\3', '\\4') | default([], true) | join('.') }}"
+    rke2_latest_cmp: "{{ rke2_latest_version | default('') | regex_search(rke2_version_regex, '\\1', '\\2', '\\3', '\\4') | default([], true) | join('.') }}"
   when:
     - rke2_check_update
     - rke2_installed
-    - rke2_latest_version is defined
+    - rke2_current_cmp | length > 0
+    - rke2_latest_cmp | length > 0
     - systemd_svc['rke2-' ~ rke2_type ~ '.service'] is defined
     - systemd_svc['rke2-' ~ rke2_type ~ '.service']['state'] == "running"
-    - (rke2_current_version | regex_replace('^v', '') | regex_replace('\+rke2r', '.'))
-      is version(rke2_latest_version | regex_replace('^v', '') | regex_replace('\+rke2r', '.'), '<')
+    - rke2_current_cmp is version(rke2_latest_cmp, '<')
