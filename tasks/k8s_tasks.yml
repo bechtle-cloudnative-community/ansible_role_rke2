@@ -11,6 +11,10 @@
       ansible.builtin.include_tasks:
         file: config.yml
 
+    - name: Determine local kubeconfig
+      ansible.builtin.include_tasks:
+        file: determine_kubeconfig.yml
+
     - name: Uncordon node
       when: rke2_installed and rke2_update
       ansible.builtin.include_tasks:

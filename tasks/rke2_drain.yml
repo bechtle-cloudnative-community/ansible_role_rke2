@@ -6,7 +6,7 @@
   when: rke2_installed
   kubernetes.core.k8s_drain:
     name: "{{ inventory_hostname_short }}"
-    kubeconfig: "{{ playbook_dir }}/rke2.yaml"
+    kubeconfig: "{{ rke2_local_kubeconfig }}"
     state: drain
     pod_selectors:
       - 'app!=csi-attacher'
