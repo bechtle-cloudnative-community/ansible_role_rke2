@@ -1,48 +1,45 @@
 ---
 # get actual channel version
-# Block to get Version
-- name: Get channel list
+# The channel server answers with a redirect to the GitHub release tag
+# e.g. https://github.com/rancher/rke2/releases/tag/v1.36.5+rke2r1
+- name: Get version for channel
   ansible.builtin.uri:
-    url: https://update.rke2.io/v1-release/channels
+    url: "https://update.rke2.io/v1-release/channels/{{ rke2_channel }}"
     method: GET
-    follow_redirects: true
-    return_content: true
-    body: json
+    follow_redirects: none
     status_code:
+      - 302
       - 503
-      - 200
-  register: rke2_version_list
+  register: rke2_channel_redirect
 
 - name: Get installed version from node
-  ansible.builtin.shell:
-    cmd: |
-      set -o pipefail
-      rke2 --version | cut -d ' ' -f 3 | head -n1 || echo "not installed"
-    executable: /bin/bash
-  changed_when: '"not installed" in rke2_installed_version.stdout'
+  ansible.builtin.command:
+    cmd: rke2 --version
   register: rke2_installed_version
+  changed_when: false
+  failed_when: false
 
 - name: Set version as fact
   ansible.builtin.set_fact:
-    rke2_latest_version: "{{ rke2_version_list.content | from_json | community.general.json_query(rke2_version_query) }}"
-  vars:
-    rke2_version_query: "data[?id=='{{ rke2_channel }}'].latest"
-  when: rke2_version_list.status != 503
-
-- name: Set version as fact
-  ansible.builtin.set_fact:
-    rke2_latest_version: "{{ rke2_installed_version | list }}"
-  when: rke2_version_list.status == 503
+    rke2_latest_version: "{{ rke2_channel_redirect.location | basename | urldecode }}"
+  when: rke2_channel_redirect.status == 302
 
 - name: Change rke2 installed
   ansible.builtin.set_fact:
     rke2_installed: true
-  when: not rke2_installed_version.changed
+    rke2_current_version: "{{ rke2_installed_version.stdout | regex_search('v[0-9][^ ]*') }}"
+  when: rke2_installed_version.rc == 0
 
+# Update only if rke2 is installed, running and older than the channel version
+# v1.36.5+rke2r1 is compared as 1.36.5.1
 - name: Change update Status
   ansible.builtin.set_fact:
     rke2_update: true
   when:
     - rke2_check_update
-    - 'rke2_installed_version.changed or rke2_latest_version[0] != rke2_installed_version.stdout'
-    - rke2_version_list.status != 503
+    - rke2_installed
+    - rke2_latest_version is defined
+    - systemd_svc['rke2-' ~ rke2_type ~ '.service'] is defined
+    - systemd_svc['rke2-' ~ rke2_type ~ '.service']['state'] == "running"
+    - (rke2_current_version | regex_replace('^v', '') | regex_replace('\+rke2r', '.'))
+      is version(rke2_latest_version | regex_replace('^v', '') | regex_replace('\+rke2r', '.'), '<')
